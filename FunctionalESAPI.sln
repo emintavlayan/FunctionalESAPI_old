@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34714.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "01_SimilarEnough", "01_SimilarEnough\01_SimilarEnough.fsproj", "{B1E064C0-06A0-4D1B-B898-88507E8E9117}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "02_calculate_IMAGER_positions", "02_calculate_IMAGER_positions\02_calculate_IMAGER_positions.fsproj", "{3D13B557-9C00-44F3-B028-68A7EC97C3C4}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "03_list_HIGH_RESOLUTION_structures", "03_list_HIGH_RESOLUTION_structures\03_list_HIGH_RESOLUTION_structures.fsproj", "{2574A104-548A-47DC-87CF-CFCAE4AC05EB}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "04_onboard_AI_structures", "04_onboard_AI_structures\04_onboard_AI_structures.fsproj", "{DD29D9BE-6486-4C14-A7FE-9A4C6F6C91F3}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "05_label_TBI_fields", "05_label_TBI_fields\05_label_TBI_fields.fsproj", "{7950076C-B8F0-484B-8BB4-515267A15B65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1E064C0-06A0-4D1B-B898-88507E8E9117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E064C0-06A0-4D1B-B898-88507E8E9117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E064C0-06A0-4D1B-B898-88507E8E9117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E064C0-06A0-4D1B-B898-88507E8E9117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D13B557-9C00-44F3-B028-68A7EC97C3C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D13B557-9C00-44F3-B028-68A7EC97C3C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D13B557-9C00-44F3-B028-68A7EC97C3C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D13B557-9C00-44F3-B028-68A7EC97C3C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2574A104-548A-47DC-87CF-CFCAE4AC05EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2574A104-548A-47DC-87CF-CFCAE4AC05EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2574A104-548A-47DC-87CF-CFCAE4AC05EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2574A104-548A-47DC-87CF-CFCAE4AC05EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD29D9BE-6486-4C14-A7FE-9A4C6F6C91F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD29D9BE-6486-4C14-A7FE-9A4C6F6C91F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD29D9BE-6486-4C14-A7FE-9A4C6F6C91F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD29D9BE-6486-4C14-A7FE-9A4C6F6C91F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7950076C-B8F0-484B-8BB4-515267A15B65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7950076C-B8F0-484B-8BB4-515267A15B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7950076C-B8F0-484B-8BB4-515267A15B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7950076C-B8F0-484B-8BB4-515267A15B65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5375AAB-2B9B-4BB8-AC6E-B9B8FDE9D349}
+	EndGlobalSection
+EndGlobal

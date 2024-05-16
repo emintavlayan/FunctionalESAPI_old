@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework> 
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <WarnOn>3390;$(WarnOn)</WarnOn>
+    <AssemblyName>$(MSBuildProjectName).esapi</AssemblyName>
+    <RootNamespace>VMS.TPS</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="TreatmentCodeTypes.fs" />
+    <Compile Include="TbiPlanIdTypes.fs" />
+    <Compile Include="Patterns.fs" />
+    <Compile Include="DomainErrors.fs" />
+    <Compile Include="TbiTreatmentCodeDb.fs" />
+    <Compile Include="TreatmentCode.fs" />
+    <Compile Include="TbiPlanId.fs" />
+    <Compile Include="TbiPlans.fs" />
+    <Compile Include="TbiCourse.fs" />
+    <Compile Include="Main.fs" />
+    <None Include="Script.fsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EvilDICOM" Version="2.0.6.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="VMS.TPS.Common.Model.API">
+      <HintPath>C:\Program Files (x86)\Varian\RTM\18.0\esapi\API\VMS.TPS.Common.Model.API.dll</HintPath>
+    </Reference>
+    <Reference Include="VMS.TPS.Common.Model.Types">
+      <HintPath>C:\Program Files (x86)\Varian\RTM\18.0\esapi\API\VMS.TPS.Common.Model.Types.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

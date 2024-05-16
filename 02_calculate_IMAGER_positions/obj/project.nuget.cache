@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "U0FZ6FaBMlRr2A2+DfRgS4N1GYTkO8HY+kJfXqLLn8zrGHMk0OzsEL3W8kHHcSip6kgN6LBTRqbeCkMt+GcvZg==",
+  "success": true,
+  "projectFilePath": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\02_calculate_IMAGER_positions\\02_calculate_IMAGER_positions.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\etav0001\\.nuget\\packages\\fsharp.core\\8.0.200\\fsharp.core.8.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}

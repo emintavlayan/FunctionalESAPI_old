@@ -1,0 +1,22 @@
+Date                 Object                                                                                     Level      Category        Log Message
+===================================================================================================================================================================================
+11/24/2023 09:13:05  General                                                                                    Info       Object Conversion Fetched 1 instances in 0 ms
+11/24/2023 09:13:05  RTIMAGE #1 [TB005 v1] / Field 10L - PORTAL [15MV, 100MU/min,
+Frames: Reset 0, Avg's 1] (tbi_field_1_modified) Info       Object Conversion Processing object with SOP Instance UID '2.25.1298819472113656750029022890502745799082'... 
+11/24/2023 09:13:05  RTIMAGE #1 [TB005 v1] / Field 10L - PORTAL [15MV, 100MU/min,
+Frames: Reset 0, Avg's 1] (tbi_field_1_modified) Info       General         Writing DICOM Media File <2.25.1298819472113656750029022890502745799082> to stream
+11/24/2023 09:13:05  RTIMAGE #1 [TB005 v1] / Field 10L - PORTAL [15MV, 100MU/min,
+Frames: Reset 0, Avg's 1] (tbi_field_1_modified) Info       Object Conversion Character set of imported object: absent -> 'ISO_IR 192'
+11/24/2023 09:13:05  RTIMAGE #1 [TB005 v1] / Field 10L - PORTAL [15MV, 100MU/min,
+Frames: Reset 0, Avg's 1] (tbi_field_1_modified) Info       Object Conversion Specific Character Set in DICOM object: 'ISO_IR 192'
+11/24/2023 09:13:05  RTIMAGE #1 [TB005 v1] / Field 10L - PORTAL [15MV, 100MU/min,
+Frames: Reset 0, Avg's 1] (tbi_field_1_modified) Error      Object Conversion Unable to parse Date Time value VR=DT; value '22-04-1977 00:00:00'.
+11/24/2023 09:13:05  RTIMAGE #1 [TB005 v1] / Field 10L - PORTAL [15MV, 100MU/min,
+Frames: Reset 0, Avg's 1] (tbi_field_1_modified) Error      Object Conversion Import of 'Patient's Birth Date' (0010,0030), 'Patient's Birth Time' (0010,0032) failed.
+11/24/2023 09:13:05  RTIMAGE #1 [TB005 v1] / Field 10L - PORTAL [15MV, 100MU/min,
+Frames: Reset 0, Avg's 1] (tbi_field_1_modified) Warning    Object Conversion Type 2 Attribute 'Referring Physician's Name' (0008,0090) is missing in DICOM stream
+11/24/2023 09:13:05  RTIMAGE #1 [TB005 v1] / Field 10L - PORTAL [15MV, 100MU/min,
+Frames: Reset 0, Avg's 1] (tbi_field_1_modified) Error      Object Conversion DICOM conversion failed
+11/24/2023 09:13:05  RTIMAGE #1 [TB005 v1] / Field 10L - PORTAL [15MV, 100MU/min,
+Frames: Reset 0, Avg's 1] (tbi_field_1_modified) Error      Object Conversion Could not convert DICOM stream: SOP Instance UID: 2.25.1298819472113656750029022890502745799082 [RT]
+11/24/2023 09:13:05  General                                                                                    Info       Object Conversion Converted 0 instances in 221 ms

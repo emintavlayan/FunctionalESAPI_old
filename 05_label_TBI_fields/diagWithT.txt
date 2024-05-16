@@ -1,0 +1,357 @@
+﻿//me:
+hi beauty. lets build a script together. we will acces some dicom files and edit some tags using evilDicom library. script will be called from within Varian Eclipse TPS. and we will use DDD priciples and f#. in your knowledge I tried to put everything you needed. there is a txt file contains all the working code from the book, and I want my code to look like that one. Dont throw me code examples unless asked. just summarize what you understood 
+
+//you:
+Hello! It's great to hear that you're interested in developing a script for accessing and editing DICOM files using the EvilDICOM library, within the context of Varian Eclipse TPS, and applying Domain-Driven Design (DDD) principles using F#. Based on your description and the resources in my knowledge
+
+//me:
+Ok so this is a plan validation domain. The input is the course which has tbi plans. It has to check several conditions and the output of this domain is validated course. After this domains passes on the green path without errors then the other parts of the code may run
+
+//you:
+Yes, I understand the bigger picture of your project now. In this plan validation domain, the primary objective is to ensure the integrity and accuracy of the treatment planning information within a course that contains TBI (Total Body Irradiation) plans. Your script acts as a crucial validation tool within this domain. It performs a series of checks and conditions on the course's TBI plans, utilizing both the Eclipse Scripting API (ESAPI) and information extracted from DICOM files.
+
+The process begins with the script accessing the open course in Eclipse, where it identifies and analyzes TBI plans. It verifies several key aspects, such as ensuring the total radiation dose in the plan matches the dose information from the plan's DICOM file and checking other treatment-specific criteria. This validation is essential for maintaining treatment accuracy and patient safety.
+
+Only when a course's TBI plans pass all these validation checks without errors does the script allow the process to proceed. This "green path" indicates that the course is validated and compliant with the required treatment parameters and standards. Following successful validation, other parts of the system or workflow can then engage, perhaps moving the course to the next stage of the treatment planning process or enabling further actions within the Eclipse TPS.
+
+This validation domain is a critical component of the overall workflow, ensuring that only accurate and compliant TBI plans move forward in the treatment planning and delivery process.
+
+//me:
+this is my general outline: - validations 
+    - validate TBI course
+        - `has` one treatment plan
+            - `validate` treatment plan
+                - `has` valid plan id
+                    - `validate` tx plan id  // TB005 0-3v1
+                        - `has` TB code 
+                        - `has` valid dose info  // dose matches code
+                        - `has` version
+                - `has` valid field ids  // Field 06R
+                - `has` treatment sessions  // all beams has been treated
+        - `has` one planning plan
+            - `validate` planning plan
+                - `has` valid plan id
+                    - `validate` plan id  // TB005 v1
+                        - `has` TB code     
+                        - `has` version
+                - `has` valid fields   // Field 06R
+        - `beam` ids must match
+        - ...?!
+    - `validate` Theraview images
+        - folder with patient id
+        - `validate` portal images 
+            - `has` valid file names
+                - "RI" + "SOP instance UID" + ".dcm"
+            - `has` proper dicom tags
+                - patient id match
+                - patient name matech
+                - series id match plan name
+                - field id matches one of the plan fields
+                - theraview related tags inplace
+                - rotation is zero
+                - ...?
+    - perform the tag editing
+    - inform the user
+
+//you:
+Your outlined process for validating a TBI course in a radiation therapy context appears comprehensive and well-structured. 
+
+//me:
+now I am pasting the contents of my code files all starting commented as filename.
+
+// File: TreatmentCode.fs
+namespace VMS.TPS
+
+module TreatmentCode = 
+
+    type TreatmentCodeId = TreatmentCodeId of string
+    type Description = Description of string
+    type Comments = Comments of string
+    type Fractionation = Fractionation of string
+    type AdditionalNote = AdditionalNote of string
+
+    // The Type to hold all info
+    type TreatmentCode = { 
+        TreatmentCodeId: TreatmentCodeId
+        Description: Description
+        Comments: Comments option
+        Fractionation: Fractionation
+        AdditionalNote: AdditionalNote option
+    }
+
+    // ex: TB005. with pattern matching
+    module TreatmentCodeId =
+
+        // Pattern for 2 or 3 letters followed by 3 digits
+        let pattern = "^[A-Za-z]{2,3}\d{3}$" 
+
+        let create code =
+            if System.Text.RegularExpressions.Regex.IsMatch(code, pattern) then
+                Some (TreatmentCodeId code)
+            else
+                let msg = sprintf " code: '%s' must match the pattern 2 or 3 letters followed by 3 digits " code
+                failwith msg
+
+    // ex: Mini helkropsbestråling
+    module Description = 
+
+        let create description =
+            Some (Description description)
+
+    // ex: Retransplanteret med ubeslægtet donor
+    module Comments = 
+
+        let create comments =
+            Some (Comments comments)
+
+    // ex: 3 Gy x 1 - 1 F/W
+    module Fractionation = 
+
+        let create fractionation =
+            Some (Fractionation fractionation)
+
+    // ex: None
+    module AdditionalNote = 
+
+        let create note =
+            Some (AdditionalNote note)
+
+// File: TbiTreatmentCodeDb.fs
+namespace VMS.TPS
+
+open TreatmentCode
+
+// tbi treatment code db
+// domain entities
+module TbiTreatmentCodeDb = 
+    let tbiTreatmentCodes = [
+        { 
+            TreatmentCodeId = TreatmentCodeId "TB002";
+            Description = Description "Mini helkropsbestråling";
+            Comments = Some (Comments "Mini TBI");
+            Fractionation = Fractionation "2 Gy x 1 - 1 F/W";
+            AdditionalNote = None
+        };
+        { 
+            TreatmentCodeId = TreatmentCodeId "TB005";
+            Description = Description "Mini helkropsbestråling";
+            Comments = Some (Comments "Retransplanteret med ubeslægtet donor");
+            Fractionation = Fractionation "3 Gy x 1 - 1 F/W";
+            AdditionalNote = None
+        };
+        {
+            TreatmentCodeId = TreatmentCodeId "TB006";
+            Description = Description "Mini helkropsbestråling";
+            Comments = Some (Comments "transplanterede med stor risiko for komplikationer eller retransplanterede med beslægtet donor");
+            Fractionation = Fractionation "2 Gy x 2 - 5 F/W";
+            AdditionalNote = None
+        };
+        {
+            TreatmentCodeId = TreatmentCodeId "TB011";
+            Description = Description "Helkropsbestråling";
+            Comments = None;
+            Fractionation = Fractionation "2 Gy x 6 - 10 F/W";
+            AdditionalNote = None
+        };
+        {
+            TreatmentCodeId = TreatmentCodeId "TB017";
+            Description = Description "Helkropsbestråling + testis";
+            Comments = None;
+            Fractionation = Fractionation "2 Gy x 6 - 10 F/W";
+            AdditionalNote = Some (AdditionalNote "Testesbestråling 4 Gy x 1, dag 2 eller 3")
+        }
+    ]
+
+// File: PlanId.fs
+namespace VMS.TPS
+
+module TbiPlanId =
+
+    // Define types needed to construct Plan Ids 
+    module TbiPlanIdTypes =
+
+        type StartingDose = StartingDose of double
+        type TotalDose = TotalDose of double
+        type VersionNumber = VersionNumber of string
+
+        type DoseInformation = {
+            StartingDose: StartingDose
+            TotalDose: TotalDose
+        }
+
+        type TbiPlanningPlanId = {
+            TreatmentCodeId: TreatmentCode.TreatmentCodeId
+            VersionNumber: VersionNumber
+        }
+
+        type TbiTreatmentPlanId = {
+            TreatmentCodeId: TreatmentCode.TreatmentCodeId
+            DoseInformation: DoseInformation
+            VersionNumber: VersionNumber
+        }
+
+    // Parser module for tbi Plan Ids
+    module TbiPlanIdParser =
+
+        open System.Text.RegularExpressions
+        open TbiPlanIdTypes
+        open TreatmentCode
+
+        // Regex pattern to match PlanSetup.Id for Tbi Planning Plan Name
+        let tbiPlanningPlanIdPattern = Regex(@"^([A-Za-z]{2,3}\d{3})\s*(v\d+)$")
+        // Explanation of Regex Pattern:
+        //
+        // ^               : Asserts the start of the string.
+        // [A-Za-z]{2,3}   : Matches any sequence of 2 to 3 letters.
+        //                   This represents the alphabetic part of the plan code.
+        // \d{3}           : Matches exactly 3 digits. This represents the numeric part of the plan code.
+        // \s*             : Matches zero or more whitespace characters. 
+        //                   This allows for flexibility in the format, handling cases where 
+        //                   there might be a space between the plan code and the version number.
+        // v               : Matches the literal character 'v', which precedes the version number.
+        // \d+             : Matches one or more digits, representing the version number of the plan.
+        // $               : Asserts the end of the string. 
+        //                   This ensures that the entire string conforms to the expected pattern.
+
+        let tryParseTbiPlanningPlanId (planSetupId: string) : TbiPlanningPlanId option =
+            let matchResult = tbiPlanningPlanIdPattern.Match(planSetupId)
+
+            if matchResult.Success then
+                let treatmentCodeId = matchResult.Groups.[1].Value
+                let versionNumber = matchResult.Groups.[2].Value
+            
+                match TreatmentCodeId.create treatmentCodeId with
+                | Some tcId -> Some { TreatmentCodeId = tcId; VersionNumber = VersionNumber versionNumber }
+                | None -> None
+
+            else 
+                None
+
+        // Regex pattern to match PlanSetup.Id for Tbi Treatment Plan Id
+        let tbiTreatmentPlanIdPattern = Regex(@"^([A-Za-z]{2,3}\d{3})\s*(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)\s*(v\d+)$")
+        // Explanation of Regex Pattern:
+        // ^               : Asserts the start of the string.
+        // [A-Za-z]{2,3}   : Matches any sequence of 2 to 3 letters.
+        //                   This represents the alphabetic part of the treatment plan code.
+        // \d{3}           : Matches exactly 3 digits. This represents the numeric part of the treatment plan code.
+        // \s*             : Matches zero or more whitespace characters. 
+        //                   This allows for flexibility in the format,
+        //                   handling cases where there might be space between components.
+        // \d+             : Matches one or more digits. This is the starting dose.
+        // (?:\.\d+)?      : A non-capturing group that matches a decimal point followed by one or more digits, zero or one time. 
+        //                   This allows for the dose to have a fractional part but does not require it.
+        // -               : Matches the literal dash character. This separates the starting dose from the total dose.
+        // \d+             : Matches one or more digits. This is the total dose.
+        // (?:\.\d+)?      : Similar to the starting dose, 
+        //                   this non-capturing group allows for an optional fractional part of the total dose.
+        // \s*             : Matches zero or more whitespace characters. 
+        //                   This allows for some flexibility in formatting before the version number.
+        // v               : Matches the literal character 'v', which precedes the version number.
+        // \d+             : Matches one or more digits, representing the version number of the plan.
+        // $               : Asserts the end of the string. 
+        //                   This ensures that the entire string conforms to the expected pattern.
+
+        let tryParseTbiTreatmentPlanId (planSetupId: string) : TbiTreatmentPlanId option =
+            let matchResult = tbiTreatmentPlanIdPattern.Match(planSetupId)
+    
+            if matchResult.Success then
+                let treatmentCodeId = matchResult.Groups.[1].Value
+                let startingDose = double (matchResult.Groups.[2].Value)
+                let totalDose = double (matchResult.Groups.[3].Value)
+                let versionNumber = matchResult.Groups.[4].Value
+
+                match TreatmentCodeId.create treatmentCodeId with
+                | Some tcId -> 
+                    Some { 
+                        TreatmentCodeId = tcId; 
+                        DoseInformation = { StartingDose = StartingDose startingDose; TotalDose = TotalDose totalDose }; 
+                        VersionNumber = VersionNumber versionNumber 
+                    }
+                | None -> None
+            else
+                None
+
+    // Active Patterns to match TBI Plan Ids
+    module ActivePatternsForTbiPlanIds =
+
+        // DefTbiPlanningPlanIderns
+        let (|TbiPlanningPlanId|TbiTreatmentPlanId|InvalidPlanId|) (planId: string) =
+            match TbiPlanIdParser.tryParseTbiPlanningPlanId planId with
+            | Some tbiPlan -> TbiPlanningPlanId tbiPlan
+            | None ->
+                match TbiPlanIdParser.tryParseTbiTreatmentPlanId planId with
+                | Some tbiTreatmentPlan -> TbiTreatmentPlanId tbiTreatmentPlan
+                | None -> InvalidPlanId
+
+// File: TbiPlans.Fs
+namespace VMS.TPS
+
+open VMS.TPS.Common.Model.API
+open VMS.TPS.Common.Model.Types
+
+open TbiPlanId
+open TbiPlanId.TbiPlanIdTypes
+open TbiPlanId.TbiPlanIdParser
+open TbiPlanId.ActivePatternsForTbiPlanIds
+
+module TbiPlans =
+
+    module TbiFieldId =
+       
+        type TbiFieldId = TbiFieldId of string
+
+    module TbiPlanningPlan =
+    
+        type TbiPlanningPlan = {
+            Id: TbiPlanIdTypes.TbiPlanningPlanId
+            PlanSetup: PlanSetup
+            TreatmentFieldIdList: TbiFieldId.TbiFieldId list
+        }
+
+    module TbiTreatmentPlan =
+    
+        type TbiPlanningPlan = {
+            Id: TbiPlanIdTypes.TbiPlanningPlanId
+            PlanSetup: PlanSetup
+            TreatmentFieldIdList: TbiFieldId.TbiFieldId list
+        }
+
+        // Function to validate TbiTreatmentPlan
+    let validateTbiTreatmentPlan (planSetup: PlanSetup) (planId: string) =
+        match TbiPlanIdParser.tryParseTbiTreatmentPlanId planId with
+        | Some tbiTreatmentPlan ->
+            // Rule 1: Starting dose check
+            let startingDose = tbiTreatmentPlan.DoseInformation.StartingDose
+            match startingDose with
+            | StartingDose dose when dose <> 0.0 && dose % planSetup.DosePerFraction.Dose <> 0.0 ->
+                let msg = sprintf "Invalid starting dose: %f. Must be zero or divisible by DosePerFraction: %f." dose planSetup.DosePerFraction.Dose
+                failwith msg
+            | _ -> ()
+
+            // Rule 2: Total dose check
+            let (TotalDose totalDoseFromPlanName) = tbiTreatmentPlan.DoseInformation.TotalDose
+            let totalDoseFromPlanSetup = planSetup.DosePerFraction.Dose * (float planSetup.NumberOfFractions.Value)
+            if totalDoseFromPlanName <> totalDoseFromPlanSetup then
+                let msg = sprintf "Total dose mismatch. Plan name total dose: %f, Plan setup total dose: %f." totalDoseFromPlanName totalDoseFromPlanSetup
+                failwith msg
+        | None ->
+            failwith "Invalid plan ID format."
+
+// File: TbiCourse.Fs
+namespace VMS.TPS
+
+open VMS.TPS.Common.Model.API
+open VMS.TPS.Common.Model.Types
+
+open TbiPlanId
+open TbiPlanId.TbiPlanIdTypes
+open TbiPlanId.TbiPlanIdParser
+open TbiPlanId.ActivePatternsForTbiPlanIds
+
+open TbiPlans
+
+module TbiCourse =
+
+    let it be = 0
+
+

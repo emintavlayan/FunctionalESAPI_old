@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\02_calculate_IMAGER_positions\\02_calculate_IMAGER_positions.fsproj": {}
+  },
+  "projects": {
+    "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\02_calculate_IMAGER_positions\\02_calculate_IMAGER_positions.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\02_calculate_IMAGER_positions\\02_calculate_IMAGER_positions.fsproj",
+        "projectName": "02_calculate_IMAGER_positions.esapi",
+        "projectPath": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\02_calculate_IMAGER_positions\\02_calculate_IMAGER_positions.fsproj",
+        "packagesPath": "C:\\Users\\etav0001\\.nuget\\packages\\",
+        "outputPath": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\02_calculate_IMAGER_positions\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\etav0001\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\8.0.204\\FSharp\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "FSharp.Core": {
+              "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[8.0.200, )",
+              "generatePathProperty": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

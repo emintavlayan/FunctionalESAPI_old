@@ -1,0 +1,51 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\ETAV0001\\source\\repos\\SimilarEnough\\SimilarEnough.fsproj": {}
+  },
+  "projects": {
+    "C:\\Users\\ETAV0001\\source\\repos\\SimilarEnough\\SimilarEnough.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\ETAV0001\\source\\repos\\SimilarEnough\\SimilarEnough.fsproj",
+        "projectName": "SimilarEnough",
+        "projectPath": "C:\\Users\\ETAV0001\\source\\repos\\SimilarEnough\\SimilarEnough.fsproj",
+        "packagesPath": "C:\\Users\\ETAV0001\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ETAV0001\\source\\repos\\SimilarEnough\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\ETAV0001\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\FSharp\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "FSharp.Core": {
+              "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[7.0.300, )",
+              "generatePathProperty": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
