@@ -1,6 +1,4 @@
 # list_HIGH_RESOLUTION_structures
-
-== FunctionalESAPI ==
  
 def: 
 * Lists high-resolution structures which are not empty
