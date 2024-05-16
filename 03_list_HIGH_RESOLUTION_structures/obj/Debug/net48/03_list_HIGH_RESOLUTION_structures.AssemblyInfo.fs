@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("03_list_HIGH_RESOLUTION_structures.esapi")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b7c3a5694cfa79829146fb896cdf52710b1bffc")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a0a24e682fe2c060ebd790c0b6a2867b76b547f")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("03_list_HIGH_RESOLUTION_structures.esapi")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("03_list_HIGH_RESOLUTION_structures.esapi")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]
