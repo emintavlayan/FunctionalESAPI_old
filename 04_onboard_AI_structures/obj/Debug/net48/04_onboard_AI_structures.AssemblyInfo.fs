@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("04_onboard_AI_structures.esapi")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.2024.509.1513")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.2024.509.1513+7b7c3a5694cfa79829146fb896cdf52710b1bffc")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.2024.509.1513+54c1fc9a510e901f6d8a3f563a9e77ed962356e8")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("04_onboard_AI_structures.esapi")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("04_onboard_AI_structures.esapi")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.2024.509.1513")>]

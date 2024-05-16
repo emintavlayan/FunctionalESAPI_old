@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("02_calculate_IMAGER_positions.esapi")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b7c3a5694cfa79829146fb896cdf52710b1bffc")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54c1fc9a510e901f6d8a3f563a9e77ed962356e8")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("02_calculate_IMAGER_positions.esapi")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("02_calculate_IMAGER_positions.esapi")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]
