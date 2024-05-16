@@ -1,6 +1,6 @@
 ﻿namespace VMS.TPS
 
-pen VMS.TPS.Common.Model.API
+open VMS.TPS.Common.Model.API
 
 open TbiTypes
 open TbiPlanId.TbiPlanIdParser
