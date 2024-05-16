@@ -1,18 +1,6 @@
-﻿// File: Main.Fs
-namespace VMS.TPS
+﻿namespace VMS.TPS
 
-open System
-open System.IO
-open System.Diagnostics
-open System.Linq
-open System.Text
-open System.Windows
-open System.Windows.Forms
-open System.Collections.Generic
-open System.Reflection
-open System.Runtime.CompilerServices
-open VMS.TPS.Common.Model.API
-open VMS.TPS.Common.Model.Types
+pen VMS.TPS.Common.Model.API
 
 open TbiTypes
 open TbiPlanId.TbiPlanIdParser
