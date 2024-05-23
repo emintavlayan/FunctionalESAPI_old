@@ -11,4 +11,8 @@
   <ItemGroup>
     <Compile Include="01_SimilarEnough.fs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\02_calculate_IMAGER_positions\02_calculate_IMAGER_positions.fsproj" />
+  </ItemGroup>
 </Project>

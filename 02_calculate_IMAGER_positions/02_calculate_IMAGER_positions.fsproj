@@ -14,12 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="01_DomainTypes.fs" />
-    <Compile Include="02_Helpers.fs" />
-    <Compile Include="02_ImagerCalculations.fs" />
-    <Compile Include="03_BeamProcessing.fs" />
-    <Compile Include="04_FieldSizeValidation.fs" />
-    <Compile Include="06_ImagerPositionCalculation.fs" />
+    <Compile Include="01_FieldSizeValidation.fs" />
+    <Compile Include="02_ImagerPositionCalculation.fs" />
     <Compile Include="03_Main.fs" />
   </ItemGroup>
 
