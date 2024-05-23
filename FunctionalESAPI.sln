@@ -13,6 +13,8 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "04_onboard_AI_structures", 
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "label_TBI_fields", "05_label_TBI_fields\label_TBI_fields.fsproj", "{63B6A646-34BE-4150-87AD-174520A244B1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "finished", "finished", "{E0C369C0-F03B-44E2-8642-4EB14BE6F6AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{61A553C2-26B2-4C56-AB62-3EE621E7873F} = {E0C369C0-F03B-44E2-8642-4EB14BE6F6AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A5375AAB-2B9B-4BB8-AC6E-B9B8FDE9D349}

@@ -5,10 +5,10 @@
   },
   "projects": {
     "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\04_onboard_AI_structures.fsproj": {
-      "version": "1.2024.509.1513",
+      "version": "1.2024.522.1430",
       "restore": {
         "projectUniqueName": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\04_onboard_AI_structures.fsproj",
-        "projectName": "04_onboard_AI_structures.esapi",
+        "projectName": "onboard_AI_structures.esapi",
         "projectPath": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\04_onboard_AI_structures.fsproj",
         "packagesPath": "C:\\Users\\etav0001\\.nuget\\packages\\",
         "outputPath": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\obj\\",

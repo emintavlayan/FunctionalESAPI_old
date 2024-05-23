@@ -10,17 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="TreatmentCodeTypes.fs" />
-    <Compile Include="TbiPlanIdTypes.fs" />
-    <Compile Include="Patterns.fs" />
-    <Compile Include="DomainErrors.fs" />
-    <Compile Include="TbiTreatmentCodeDb.fs" />
-    <Compile Include="TreatmentCode.fs" />
-    <Compile Include="TbiPlanId.fs" />
-    <Compile Include="TbiPlans.fs" />
-    <Compile Include="TbiCourse.fs" />
-    <Compile Include="Main.fs" />
-    <None Include="Script.fsx" />
+    <Compile Include="01_TreatmentCodeTypes.fs" />
+    <Compile Include="02_TbiPlanIdTypes.fs" />
+    <Compile Include="03_Patterns.fs" />
+    <Compile Include="04_DomainErrors.fs" />
+    <Compile Include="05_TbiTreatmentCodeDb.fs" />
+    <Compile Include="06_TreatmentCode.fs" />
+    <Compile Include="07_TbiPlanId.fs" />
+    <Compile Include="08_TbiPlans.fs" />
+    <Compile Include="09_TbiCourse.fs" />
+    <Compile Include="10_Main.fs" />
   </ItemGroup>
 
   <ItemGroup>

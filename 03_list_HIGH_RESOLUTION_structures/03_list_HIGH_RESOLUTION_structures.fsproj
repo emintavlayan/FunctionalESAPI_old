@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <None Include="README.md" />
-    <Compile Include="list_HIGH_RESOLUTION_structures.fs" />
+    <Compile Include="01_list_HIGH_RESOLUTION_structures.fs" />
   </ItemGroup>
 
   <ItemGroup />

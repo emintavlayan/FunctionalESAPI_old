@@ -67,7 +67,8 @@ module IdComparison =
     /// <returns>Boolean indicating if the strings are similar enough.</returns>
     let similarEnough (stringA: string) (stringB: string) =
         
-        /// Check for null values first to prevent C# null reference exceptions
+        // Check for null values first to prevent C# people from frustration
+        // Because C# exercises "null reference exceptions" ?!?!
         match stringA, stringB with
         | null, _ -> false
         | _, null -> false
@@ -90,16 +91,14 @@ type StringExtensions() =
     /// This extension method allows for a natural usage pattern in C#,
     /// making it possible to call it on string instances directly.
     /// 
-    /// Include the F# DLL in your C# project, 
-    /// add a 'using StringExtensions;' directive.
+    /// - Include the F# DLL in your C# project, 
+    /// - add a 'using StringExtensions;' directive.
     /// </summary>
     /// <example>
     /// Call this function from C# like this:
-    ///
-    /// SimilarEnough("string1", "string2"); 
+    /// - SimilarEnough("string1", "string2"); 
     /// or
-    /// "string1".SimilarEnough("string2");
-    ///
+    /// - "string1".SimilarEnough("string2");
     /// </example>
     [<Extension>]
     static member SimilarEnough (str1: string, str2: string) : bool =

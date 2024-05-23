@@ -2,69 +2,101 @@
 <doc>
 <assembly><name>onboard_AI_structures.esapi</name></assembly>
 <members>
-<member name="T:VMS.TPS.DatabaseResult`1">
+<member name="T:VMS.TPS.TableParser.TableParseResult">
 <summary>
- Type alias for the result type used throughout this module.
+ Represents the result of parsing the structure pairs table.
 </summary>
 </member>
-<member name="T:VMS.TPS.DatabaseAccessError">
+<member name="M:VMS.TPS.TableParser.parseTableToTuples(System.String)">
 <summary>
- Represents various kinds of errors that can occur in database access operations.
+ Tries to load an HTML string and parse it to find a specified table.
+ &lt;param name=&quot;html&quot;&gt;The HTML string to parse.&lt;/param&gt;
+ &lt;returns&gt;List of tuples from the table rows if successful, otherwise throws an exception.&lt;/returns&gt;
+</summary>
+</member>
+<member name="M:VMS.TPS.TableParser.extractCells(HtmlAgilityPack.HtmlNode)">
+<summary>
+ Extracts cells from a row and creates a tuple if there are at least two cells.
+</summary>
+</member>
+<member name="M:VMS.TPS.TableParser.extractRows(HtmlAgilityPack.HtmlNode)">
+<summary>
+ Extracts all rows from a table.
+</summary>
+</member>
+<member name="M:VMS.TPS.TableParser.selectTableWithClass``1(``0,HtmlAgilityPack.HtmlDocument)">
+<summary>
+ Selects the first table with a specific class.
+</summary>
+</member>
+<member name="M:VMS.TPS.TableParser.loadHtml(System.String)">
+<summary>
+ Loads HTML from a string.
+</summary>
+</member>
+<member name="T:VMS.TPS.TableParser">
+<summary>
+ Module for parsing HTML tables into tuples of string data.
+</summary>
+</member>
+<member name="T:VMS.TPS.DatabaseAccess.DatabaseAccessResult">
+<summary>
+ Represents the result of database access attempt.
 </summary>
 </member>
 <member name="M:VMS.TPS.DatabaseAccess.getData(System.String)">
 <summary>
- Main function to get data from a URL, handling all steps and possible errors.
-</summary>
-</member>
-<member name="M:VMS.TPS.DatabaseAccess.parseHtmlToData(System.String)">
-<summary>
- Tries to parse HTML content to extract data, handling errors in the process.
+ Main function to get data from a URL.
 </summary>
 </member>
 <member name="M:VMS.TPS.DatabaseAccess.parseHtmlFromJson(System.String)">
 <summary>
- Parses HTML content from a JSON string, handling potential parsing errors.
+ Parses HTML content from JSON.
 </summary>
 </member>
 <member name="M:VMS.TPS.DatabaseAccess.executeCurl(System.String)">
 <summary>
- Executes curl and captures the output, handling errors appropriately.
+ Executes curl and returns the output.
 </summary>
 </member>
 <member name="M:VMS.TPS.DatabaseAccess.startProcess(System.String,System.String)">
 <summary>
- Starts a process with the specified fileName and arguments, handling potential errors.
+ Sets up and starts a process with given parameters.
 </summary>
 </member>
-<member name="T:VMS.TPS.StructureOperations.StructureSetError">
+<member name="T:VMS.TPS.DatabaseAccess">
 <summary>
- Represents various kinds of errors that can occur in operations related to structure sets.
+ Module for accessing and parsing data from a database.
 </summary>
 </member>
-<member name="M:VMS.TPS.StructureOperations.copyVolume(VMS.TPS.Common.Model.API.StructureSet,System.String,System.String)">
+<member name="T:VMS.TPS.structureSearch.StructureSearchResult">
 <summary>
- Copies volume from one structure to another if conditions are met, using the validated &quot;AI&quot; and &quot;RH&quot;.
+ Represents the result of searching for a structure.
 </summary>
 </member>
-<member name="M:VMS.TPS.StructureOperations.validateRh(System.String,VMS.TPS.Common.Model.API.StructureSet)">
+<member name="M:VMS.TPS.structureSearch.findStructureWithValidation(System.String,VMS.TPS.Common.Model.API.StructureSet)">
 <summary>
- Validates the &quot;RH&quot; structure: must be empty.
+ Validates a structure by ID, checking its existence and volume.
 </summary>
 </member>
-<member name="M:VMS.TPS.StructureOperations.validateAi(System.String,VMS.TPS.Common.Model.API.StructureSet)">
-<summary>
- Validates the &quot;AI&quot; structure: must have significant volume.
-</summary>
-</member>
-<member name="M:VMS.TPS.StructureOperations.hasVolume(VMS.TPS.Common.Model.API.Structure)">
+<member name="M:VMS.TPS.structureSearch.hasVolume(VMS.TPS.Common.Model.API.Structure)">
 <summary>
  Checks if a structure has significant volume.
 </summary>
 </member>
-<member name="M:VMS.TPS.StructureOperations.getStructureById(System.String,VMS.TPS.Common.Model.API.StructureSet)">
+<member name="M:VMS.TPS.structureSearch.getStructureById(System.String,VMS.TPS.Common.Model.API.StructureSet)">
 <summary>
- Finds a structure by ID within a StructureSet and checks its volume.
+ Finds a structure by ID within a StructureSet.
+</summary>
+</member>
+<member name="T:VMS.TPS.structureSearch">
+<summary>
+ Module for searching and validating structures within a StructureSet.
+</summary>
+</member>
+<member name="T:VMS.TPS.CopyVolume.VolumeOperationResult">
+<summary>
+ Represents the result of copying structure segment volume.
 </summary>
 </member>
 <member name="M:VMS.TPS.HtmlOutput.finalizeAndDisplayHtml">

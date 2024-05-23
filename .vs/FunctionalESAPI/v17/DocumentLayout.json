@@ -1,7 +1,40 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|h:\\dokumenter\\home\\source\\functionalesapi\\04_onboard_ai_structures\\04_onboard_ai_structures.fsproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|solutionrelative:04_onboard_ai_structures\\04_onboard_ai_structures.fsproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|h:\\dokumenter\\home\\source\\functionalesapi\\04_onboard_ai_structures\\01_tableparser.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
+      "RelativeMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|solutionrelative:04_onboard_ai_structures\\01_tableparser.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|h:\\dokumenter\\home\\source\\functionalesapi\\04_onboard_ai_structures\\02_databaseaccess.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
+      "RelativeMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|solutionrelative:04_onboard_ai_structures\\02_databaseaccess.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|h:\\dokumenter\\home\\source\\functionalesapi\\04_onboard_ai_structures\\06_onboardaistructures.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
+      "RelativeMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|solutionrelative:04_onboard_ai_structures\\06_onboardaistructures.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|h:\\dokumenter\\home\\source\\functionalesapi\\04_onboard_ai_structures\\05_htmloutput.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
+      "RelativeMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|solutionrelative:04_onboard_ai_structures\\05_htmloutput.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|h:\\dokumenter\\home\\source\\functionalesapi\\04_onboard_ai_structures\\04_copyvolume.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
+      "RelativeMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|solutionrelative:04_onboard_ai_structures\\04_copyvolume.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|h:\\dokumenter\\home\\source\\functionalesapi\\04_onboard_ai_structures\\03_structuresearch.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
+      "RelativeMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|solutionrelative:04_onboard_ai_structures\\03_structuresearch.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|h:\\dokumenter\\home\\source\\functionalesapi\\04_onboard_ai_structures\\07_main.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
+      "RelativeMoniker": "D:0:0:{C81D9A74-1995-4A05-B5E3-B639DAAA15A7}|04_onboard_AI_structures\\04_onboard_AI_structures.fsproj|solutionrelative:04_onboard_ai_structures\\07_main.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,6 +55,109 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "04_onboard_AI_structures",
+              "DocumentMoniker": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\04_onboard_AI_structures.fsproj",
+              "RelativeDocumentMoniker": "04_onboard_AI_structures\\04_onboard_AI_structures.fsproj",
+              "ToolTip": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\04_onboard_AI_structures.fsproj",
+              "RelativeToolTip": "04_onboard_AI_structures\\04_onboard_AI_structures.fsproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001351|",
+              "WhenOpened": "2024-05-22T12:30:30.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "01_TableParser.fs",
+              "DocumentMoniker": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\01_TableParser.fs",
+              "RelativeDocumentMoniker": "04_onboard_AI_structures\\01_TableParser.fs",
+              "ToolTip": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\01_TableParser.fs",
+              "RelativeToolTip": "04_onboard_AI_structures\\01_TableParser.fs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-22T12:24:11.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "02_DatabaseAccess.fs",
+              "DocumentMoniker": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\02_DatabaseAccess.fs",
+              "RelativeDocumentMoniker": "04_onboard_AI_structures\\02_DatabaseAccess.fs",
+              "ToolTip": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\02_DatabaseAccess.fs",
+              "RelativeToolTip": "04_onboard_AI_structures\\02_DatabaseAccess.fs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-22T12:24:10.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "03_StructureSearch.fs",
+              "DocumentMoniker": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\03_StructureSearch.fs",
+              "RelativeDocumentMoniker": "04_onboard_AI_structures\\03_StructureSearch.fs",
+              "ToolTip": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\03_StructureSearch.fs",
+              "RelativeToolTip": "04_onboard_AI_structures\\03_StructureSearch.fs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-22T12:24:09.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "04_CopyVolume.fs",
+              "DocumentMoniker": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\04_CopyVolume.fs",
+              "RelativeDocumentMoniker": "04_onboard_AI_structures\\04_CopyVolume.fs",
+              "ToolTip": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\04_CopyVolume.fs",
+              "RelativeToolTip": "04_onboard_AI_structures\\04_CopyVolume.fs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-22T12:24:08.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "05_HtmlOutput.fs",
+              "DocumentMoniker": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\05_HtmlOutput.fs",
+              "RelativeDocumentMoniker": "04_onboard_AI_structures\\05_HtmlOutput.fs",
+              "ToolTip": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\05_HtmlOutput.fs",
+              "RelativeToolTip": "04_onboard_AI_structures\\05_HtmlOutput.fs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-22T12:24:07.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "06_OnboardAiStructures.fs",
+              "DocumentMoniker": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\06_OnboardAiStructures.fs",
+              "RelativeDocumentMoniker": "04_onboard_AI_structures\\06_OnboardAiStructures.fs",
+              "ToolTip": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\06_OnboardAiStructures.fs",
+              "RelativeToolTip": "04_onboard_AI_structures\\06_OnboardAiStructures.fs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-22T12:24:06.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "07_Main.fs",
+              "DocumentMoniker": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\07_Main.fs",
+              "RelativeDocumentMoniker": "04_onboard_AI_structures\\07_Main.fs",
+              "ToolTip": "H:\\Dokumenter\\Home\\source\\FunctionalESAPI\\04_onboard_AI_structures\\07_Main.fs",
+              "RelativeToolTip": "04_onboard_AI_structures\\07_Main.fs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-22T12:24:06.069Z",
+              "EditorCaption": ""
             }
           ]
         }

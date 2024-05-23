@@ -1,4 +1,4 @@
-﻿namespace VMS.TPS
+﻿namespace VMS.TPS.FunctionalESAPI
 
 open System
 open System.IO
@@ -7,7 +7,7 @@ open System.Text
 open VMS.TPS.Common.Model.API
 open FieldSizeValidation
 
-// Define a record type to represent our Setup Beams
+/// Represents a setup beam with imager positions.
 type SetupBeamWithImagerPosition = {
     Id : string
     X1 : float
@@ -19,22 +19,22 @@ type SetupBeamWithImagerPosition = {
     ImagerLat : float  
 }
 
-module calculate_IMAGER_positions =
-    // Giant function to call them all
-    // Effort is done to use only Run(context) in the main module
-    // This way script work on both situations
-    // - when called from Eclipse it works as expected
-    // - when C# people add this dll, they can just call:
-    // -- calculate_IMAGER_positions.Run(context)
-    let Run (context : ScriptContext) = 
+module ImagerPositionCalculation =
+    
+    /// Main function to calculate imager positions for setup beams.
+    /// This function is intended to be used from both Eclipse and C# environments.
+    /// - `context`: The script context containing the plan setup.
+    let calculate_IMAGER_positions (context : ScriptContext) = 
         
         // Get the plan setup from the context
         let plan = context.PlanSetup
         
-        // Function to calculate Lateral Imager Position
+        /// Function to calculate lateral imager position based on jaw positions.
+        /// - `x1`: The X1 jaw position.
+        /// - `x2`: The X2 jaw position.
         let calculateImagerLat x1 x2 =
             // Calculate the absolute shift needed
-            let shiftLat = (abs (x1 - x2) / 2.0) * 1.6
+            let shiftLat = (abs (x1 - x2) / 2.0) * 1.6 // Because the imager is at 60.0cm
 
             // Apply constraints to the shift
             let constrainedShiftLat =
@@ -46,14 +46,16 @@ module calculate_IMAGER_positions =
             // Calculate the imager lateral position based on direction
             let imagerLat =
                 if ( constrainedShiftLat > 0.0 ) && ( x1 > x2 ) then
-                    1000.0 - constrainedShiftLat
+                    1000.0 - constrainedShiftLat 
                 else
                     constrainedShiftLat
 
             // Return the imager lateral position
             imagerLat
 
-        // Function to calculate Longitudinal Imager Position
+        /// Function to calculate longitudinal imager position based on jaw positions.
+        /// - `y1`: The Y1 jaw position.
+        /// - `y2`: The Y2 jaw position.
         let calculateImagerLng y1 y2 =
             // Calculate the absolute shift needed
             let shiftLng = (abs (y1 - y2) / 2.0) * 1.6
@@ -104,7 +106,7 @@ module calculate_IMAGER_positions =
                 let y2 = beam.ControlPoints.[0].JawPositions.Y2 /   10.0  // divide by ten to convert from mm to cm
 
                 // Check if input values are valid
-                CheckFieldSizes beam.Id x1 x2 y1 y2
+                WarnIfSetupFieldSizeNot18cm beam.Id x1 x2 y1 y2
         
                 // Calculate the imager lateral and longitudinal positions
                 let imagerLng = calculateImagerLng y1 y2
@@ -114,15 +116,21 @@ module calculate_IMAGER_positions =
                 { Id = id; X1 = x1; X2 = x2; Y1 = y1; Y2 = y2; ImagerVrt = 60.0; ImagerLng = imagerLng; ImagerLat = imagerLat })
             |> List.ofSeq // Convert seq<setupBeam> to setupBeam list
 
-        // Helper Functions to order fields
+        /// Helper function to check if a string contains all specified substrings.
+        /// - `s`: The string to check.
+        /// - `substrings`: The list of substrings to check for.
         let containsThese (s: string) (substrings: string list) =
             substrings |> List.forall (fun x -> s.ToLower().Contains(x))
 
+        /// Helper function to check if a string does not contain any of the specified substrings.
+        /// - `s`: The string to check.
+        /// - `substrings`: The list of substrings to check for.
         let doesNotContainThose (s: string) (substrings: string list) =
             substrings |> List.forall (fun x -> not (s.ToLower().Contains(x)))
 
-        // Effort to sort the output as seen on planning
-        // this is not guaranteed because I cannot get field order from ECL
+        /// Function to determine the sorting order of a setup beam based on its ID.
+        /// - `sb`: The setup beam to sort.
+        /// Result not guaranteed because I cannot get field order from ECL 
         let sortByOrder (sb: SetupBeamWithImagerPosition) =
             let id = sb.Id
             match id with
@@ -137,13 +145,17 @@ module calculate_IMAGER_positions =
             | _ when containsThese id ["set"; "up"; "270"; "boost"] -> 6
             | _ -> 7
 
+        /// Function to sort a list of setup beams.
+        /// - `lst`: The list of setup beams to sort.
         let sortList (lst: SetupBeamWithImagerPosition list) =
             lst |> List.sortBy sortByOrder  
 
         // Ordered Setup beams with imager
         let orderedSetupBeamsWithImager = sortList setupBeamsWithImagerPositions
 
-        // Function to get values from beams ( just for printing )
+        /// Function to get a specific property value from a setup beam.
+        /// - `property`: The property name.
+        /// - `beam`: The setup beam.
         let getValue (property: string) (beam: SetupBeamWithImagerPosition) =
             match property with
             | "X1" -> beam.X1
@@ -155,7 +167,8 @@ module calculate_IMAGER_positions =
             | "ImagerLat" -> beam.ImagerLat
             | _ -> invalidArg "property" "Invalid property"
 
-        // Function to create html table from data
+        /// Function to create an HTML table from a list of setup beams.
+        /// - `beams`: The list of setup beams.
         let toHtmlTable (beams: SetupBeamWithImagerPosition list) =
             let filteredBeams, medBeam = beams |> List.partition (fun beam -> beam.Id.ToLower().Contains("med"))
             let sortedBeams = medBeam @ filteredBeams
@@ -170,7 +183,9 @@ module calculate_IMAGER_positions =
                 |> List.fold (+) ""
             sprintf "<!DOCTYPE html>\n<html>\n<head>\n<style>\nbody {\n  margin-left: 5%%;\n  margin-right: 5%%;\n  font-family: sans-serif;\n}\n\nh1 {\n  display: block;\n  font-size: 2em;\n  margin-block-start: 0.67em;\n  margin-block-end: 0.67em;\n  margin-inline-start: 0px;\n  margin-inline-end: 0px;\n  font-weight: bold;\n  margin-left: -3%%;\n}\n\ntable {\n  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;\n  border: 2px solid blue;\n  border-collapse: collapse;\n  text-indent: initial;\n  white-space: normal;\n  line-height: normal;\n  font-weight: normal;\n  font-style: normal;\n  text-align: start;\n  border-spacing: 2px;\n  font-variant: normal;\n}\n\ntd, th {\n  font-size: 1.17em;\n  border: 1px solid blue;\n  padding: 3px 7px 2px 7px;\n  text-align: left;\n  padding: 8px;\n width: 120px;\n}\nth {background-color: lightgray;}\n</style>\n</head>\n<body>\n<h1>\nImager Positions\n</h1>\n<table>%s%s</table>\n</body>\n</html>" headerRow bodyRows
 
-        // Function to write table as html and show
+        /// Function to write the HTML table to a file and open it.
+        /// - `filename`: The name of the file.
+        /// - `beams`: The list of setup beams.
         let writeHtmlTableToFile (filename: string) (beams: SetupBeamWithImagerPosition list) =
             let html = toHtmlTable beams
             let fullPath = Path.Combine(Path.GetTempPath(), filename)
