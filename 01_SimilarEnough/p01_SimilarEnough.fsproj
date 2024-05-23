@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\02_calculate_IMAGER_positions\02_calculate_IMAGER_positions.fsproj" />
+    <ProjectReference Include="..\02_calculate_IMAGER_positions\p02_calculate_IMAGER_positions.fsproj" />
   </ItemGroup>
 </Project>

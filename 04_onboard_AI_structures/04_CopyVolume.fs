@@ -17,6 +17,7 @@ module CopyVolume =
         match (aiStr, rhStr) with
         | (ExistsAndHasVolume aiStr, ExistsAndEmpty rhStr) -> 
             rhStr.SegmentVolume <- aiStr.SegmentVolume
+            ss.RemoveStructure(aiStr)
             VolumeCopiedSuccessfully (sprintf "Volume from %s has been copied to %s successfully." aiId rhId)
         
         | (StructureNotFound, _) -> 

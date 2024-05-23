@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\04_onboard_AI_structures\04_onboard_AI_structures.fsproj" />
+    <ProjectReference Include="..\04_onboard_AI_structures\p04_onboard_AI_structures.fsproj" />
   </ItemGroup>
 
   <ItemGroup>
