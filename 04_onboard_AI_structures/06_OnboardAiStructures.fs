@@ -54,8 +54,8 @@ module OnboardAiStructures =
             | ParseError msg ->
                 MessageBox.Show( $"Error parsing table:\n-----\n{msg}") |> ignore
 
-        | CurlNotInstalled ->
-            MessageBox.Show( $"Error: Curl is not installed on this system.") |> ignore
+        | UnexpectedHttpResponse responseCode ->
+            MessageBox.Show( $"Error: The server returned an unexpected response status code: {responseCode}") |> ignore
 
         | JsonParsingError msg ->
             MessageBox.Show( $"Error parsing JSON:\n-----\n{msg}") |> ignore

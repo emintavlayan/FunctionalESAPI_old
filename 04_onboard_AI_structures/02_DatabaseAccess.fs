@@ -1,8 +1,8 @@
 ﻿namespace VMS.TPS
 
 open TableParser
-open System.Diagnostics
 open Newtonsoft.Json.Linq
+open System.Net.Http
 
 /// Module for accessing and parsing data from a database.
 module DatabaseAccess =
@@ -10,37 +10,29 @@ module DatabaseAccess =
     /// Represents the result of database access attempt.
     type DatabaseAccessResult =
         | TableParseResult of TableParseResult
-        | CurlNotInstalled
+        | UnexpectedHttpResponse of int
         | JsonParsingError of string
         | HtmlParsingError of string
         | ProcessError of string
         | UnexpectedError of string
 
-    /// Sets up and starts a process with given parameters.
-    let startProcess (fileName: string) (arguments: string) =
-        let startInfo = ProcessStartInfo(
-            FileName = fileName,
-            Arguments = arguments,
-            RedirectStandardOutput = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        )
-        try
-            Some(Process.Start(startInfo))
-        with
-        | :? System.ComponentModel.Win32Exception as ex ->
-            None 
 
-    /// Executes curl and returns the output.
-    let executeCurl url =
-        let arguments = sprintf "-s \"%s\"" url
-        match startProcess "curl" arguments with
-        | Some myProcess ->
-            let output = myProcess.StandardOutput.ReadToEnd()
-            myProcess.WaitForExit()
-            Some output
-        | None -> None
+    // makes a HTTP request to a URL and returns the response content
+    let executeHttpRequest (url: string) =
+         use client = new HttpClient()
 
+         let response = 
+            client.GetAsync(url)
+            |> Async.AwaitTask
+            |> Async.RunSynchronously
+
+         if response.IsSuccessStatusCode then
+            response.Content.ReadAsStringAsync()
+            |> Async.AwaitTask
+            |> Async.RunSynchronously
+            |> Ok
+         else
+            Error response.StatusCode
     /// Parses HTML content from JSON.
     let parseHtmlFromJson output =
         try
@@ -53,12 +45,12 @@ module DatabaseAccess =
 
     /// Main function to get data from a URL.
     let getData (url: string) : DatabaseAccessResult =
-        match executeCurl url with
-        | Some output ->
+        match executeHttpRequest url with
+        | Ok output ->
             match parseHtmlFromJson output with
             | Some htmlContent ->
                 let parseResult = parseTableToTuples htmlContent
                 TableParseResult parseResult
             | None ->
                 JsonParsingError "Failed to parse JSON from the output."
-        | None -> CurlNotInstalled
+        | Error e -> e |> int |> UnexpectedHttpResponse
