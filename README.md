@@ -3,8 +3,8 @@
 A suite of ESAPI scripts, crafted entirely in F#, adhering to Domain-Driven Design principles. This approach is driven by a passion for creating a better, more efficient development process, aiming to enhance collaboration among team members, streamline the workflow, and encourage the creation of innovative solutions.
 <br><br>
 
-### Definitions:
----
+## Definitions:
+
 **ESAPI:** Short for the Scripting API of the Varian Eclipse Treatment Planning System (TPS). It is used to automate processes, add new functionalities, and extract data insights.
 
 **TPS:** A computer system designed to assist in creating optimal Radiotherapy plans. Key inputs include patients' 3D DICOM imaging and Linac commissioning data.
@@ -16,8 +16,8 @@ A suite of ESAPI scripts, crafted entirely in F#, adhering to Domain-Driven Desi
 **Me:** A medical physicist at Copenhagen University Hospital in Denmark. 
 <br><br>
 
-### Why Functional Programming:
----
+## Why Functional Programming:
+
 **Physics Background:** Our training is steeped in pure functions, making functional programming intuitive. Pure means, functions don't create mess outside their context; same input causes same output. 
 
 **Safety and Simplicity:** Provides a safer approach to problem-solving with a lightweight mindset. At the end its just functions and data.
