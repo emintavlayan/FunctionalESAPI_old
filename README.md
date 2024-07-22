@@ -33,8 +33,8 @@ A suite of ESAPI scripts, crafted entirely in F#, adhering to Domain-Driven Desi
 **OOP in FP:** F# goes beyond just being a Functional Programming Language. You can structure your code in a clean, purely functional manner and then incorporate objects if necessary. F# can be more object-oriented than C# can ever be functional!
 <br><br>
 
-### Why F#:
----
+## Why F#:
+
 **Elegant and Powerful:** F# is a functional-first language which emphasizes immutability, higher-order functions, and concise syntax.F# combines beauty and power with an expressive syntax. Developed and maintained by Microsoft, so it will be around for a long time.
 
 **Seamless Integration:** .NET compiles to the same IL, ensuring compatibility with the TPS. So Eclipse won't even notice which language you have used.
@@ -42,8 +42,8 @@ A suite of ESAPI scripts, crafted entirely in F#, adhering to Domain-Driven Desi
 **Broad .NET Ecosystem:** Access to everything .NET offers, including machine learning, user interfaces, and more.
 <br><br>
 
-### Why Domain-Driven Design:
----
+## Why Domain-Driven Design:
+
 **Expert Alignment:** We are domain experts by definition. Period. There is a strong argument why computer scientist should learn the domain very well in order to help solving problems. we are going to the other direction, from knowing the domain very well to learn code and solve problems. DDD is exactly what we need.
 
 **Code as Documentation:** The codebase serves as clear documentation, enhancing understanding and maintenance. Here I will try to use clear meaningful function names and seperate concerns in small maintainable modules
@@ -51,8 +51,8 @@ A suite of ESAPI scripts, crafted entirely in F#, adhering to Domain-Driven Desi
 **Enhanced Communication:** Facilitates better collaboration between developers and domain experts. I trust all my collegues, without any coding background, will be able to read and understand what the code does. And I find this very secure way of having feedbacks.
 <br><br> 
 
-### How it looks:
----
+## How it looks:
+
 **Less is more:** no paranthesis, no curly braces; indentation is enough. Just let your non-coding friends read this. 
 
 ```fsharp
@@ -76,8 +76,8 @@ module StructureSearch =
 **End Game** is hopefully our codes will look like this ReadMe file, bite-size functions with clear naming, encapsulated in small modules. This way, I believe we can grow into a bigger community of developers by breaking barriers and onboarding friends, even those who don't know programming.
 <br> 
 
-### Resources:
----
+## Resources:
+
 - [F# Software Foundation](https://fsharp.org/)
 
 - [F# for Fun and Profit](https://fsharpforfunandprofit.com/) by Scott Wlaschin
