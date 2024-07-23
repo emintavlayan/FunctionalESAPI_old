@@ -11,7 +11,7 @@ module ActivePatterns =
     
     /// Checks if two strings are equal.
     let (|Equal|_|) s1 s2 =
-        if s1 = s2 
+        if s1.Equals(s2) 
         then Some ()  // Option type 
         else None     // valubale stuff
 
