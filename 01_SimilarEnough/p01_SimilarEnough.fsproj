@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="01_SimilarEnough.fs" />
+    <Compile Include="01_RegexUtils.fs" />
+    <Compile Include="02_ActivePatterns.fs" />
+    <Compile Include="03_SimilarEnough.fs" />
   </ItemGroup>
 
   <ItemGroup>
