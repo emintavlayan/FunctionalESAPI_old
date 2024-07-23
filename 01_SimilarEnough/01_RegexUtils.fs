@@ -3,7 +3,7 @@
 open System
 open System.Text.RegularExpressions
 
-/// Contains functions and active patterns for comparing and processing identifiers.
+/// Contains functions that use Regular Expressions.
 module RegexUtils = 
     
     /// Strips non-alphanumeric characters from the input string using regular expressions.

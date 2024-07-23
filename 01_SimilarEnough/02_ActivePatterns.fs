@@ -4,8 +4,8 @@ open System
 open System.Text.RegularExpressions
 open System.Runtime.CompilerServices
 
-/// Contains functions and active patterns for comparing and processing identifiers.
-/// note: all input strings will be converted to lowercase and only alphanumerics,
+/// Contains active patterns for comparing strings.
+/// note: all input strings will be converted to lowercase alphanumerics,
 ///       before being consumed by Active Patterns.
 module ActivePatterns = 
     
