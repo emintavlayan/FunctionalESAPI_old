@@ -28,12 +28,12 @@ type StringExtensions() =
     /// This extension method allows for a natural usage pattern in C#,
     ///   making it possible to call it on string instances directly.
     /// To make this work:
-    ///   . Include the F# DLL in your C# project, 
-    ///   . add a 'using StringExtensions;' directive.
+    ///   - Include the F# DLL in your C# project, 
+    ///   - add a 'using StringExtensions;' directive.
     /// Call this function from C# like this:
-    ///   . SimilarEnough(string1, string2); 
+    ///   - SimilarEnough(string1, string2); 
     /// or
-    ///   . string1.SimilarEnough(string2);
+    ///   - string1.SimilarEnough(string2);
     [<Extension>]
     static member SimilarEnough (str1: string, str2: string) : bool =
         // Check for null values first to prevent C# people from frustration
