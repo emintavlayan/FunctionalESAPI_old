@@ -21,6 +21,7 @@ module IdComparison =
         | Equal(b)              -> true
         | BothAreBowel(b)       -> true
         | HasLeftRightSuffix(b) -> true
+        // Use the next best active pattern here
         | _ -> false
 
 type StringExtensions() =

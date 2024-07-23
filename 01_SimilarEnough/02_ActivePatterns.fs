@@ -5,7 +5,7 @@ open System.Text.RegularExpressions
 open System.Runtime.CompilerServices
 
 /// Contains functions and active patterns for comparing and processing identifiers.
-/// note: all input strings will be converted to lowercase and only alphanumerics
+/// note: all input strings will be converted to lowercase and only alphanumerics,
 ///       before being consumed by Active Patterns.
 module ActivePatterns = 
     
@@ -23,9 +23,8 @@ module ActivePatterns =
         then Some () 
         else None
     
-    /// Checks if two strings are the same but
-    ///   one of them have a direction suffix, such as 'L' or 'Right'.
-    ///   example: ( Parotis, Parotis-L) (Lung_Right, Lung)
+    /// Checks if two strings are the same except one have a direction suffix.
+    /// example: ( Parotis, Parotis-L) (Lung_Right, Lung)
     let (|HasLeftRightSuffix|_|) s1 s2 = 
         
         // Checks if a string ends with a direction suffix
@@ -55,5 +54,8 @@ module ActivePatterns =
             (s1 = baseOf s2)
             then Some ()  
 
-        else None  
+        else None
+
+    /// Define the next best active pattern here
+    /// ---
         
