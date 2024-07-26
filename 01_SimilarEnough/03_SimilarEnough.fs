@@ -10,7 +10,7 @@ open RegexUtils
 module IdComparison = 
     
     /// Determines if two strings are considered similar enough based on a series of checks.
-    let similarEnough s1 s2 =
+    let (|SimilarEnough|_|)  s1 s2 =
 
         // Convert strings to lowercase alphanumerics for uniform comparison
         let a = onlyAlphaNumerics(s1).ToLowerInvariant()
@@ -18,12 +18,12 @@ module IdComparison =
         
         // Match strings against defined active patterns to determine similarity
         match a with
-        | Equal(b)              -> true
-        | BothAreBowel(b)       -> true
-        | HasLeftRightSuffix(b) -> true
+        | Equal(b)              -> Some s1
+        | BothAreBowel(b)       -> Some s1
+        | HasLeftRightSuffix(b) -> Some s1
         // Use the next best active pattern here
-        | _ -> false
-
+        | _ -> None
+    
 type StringExtensions() =
     /// Provides a C# friendly way to access the 'similarEnough' functionality from F#.
     /// This extension method allows for a natural usage pattern in C#,
