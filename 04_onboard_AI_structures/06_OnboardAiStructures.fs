@@ -7,6 +7,18 @@ open TableParser
 open DatabaseAccess
 open CopyVolume
 
+module DataBaseAccessError =
+    let message: DataBaseAccessError -> string =
+        function
+        | UnexpectedHttpResponse code ->  $"Error: The server returned an unexpected response status code {code}"
+        | JsonParsingError -> $"Error parsing JSON"
+        | HtmlParsingError msg -> $"Error parsing HTML:\n-----\n{msg}"
+        | UnexpectedError msg ->  $"Unexpected error:\n-----\n{msg}"
+        | ProcessError msg -> $"Process error:\n-----\n{msg}"
+        | TableParseError NoTableFound -> "Error: No table found in the HTML."
+        | TableParseError NoRowsFound -> "Error: No rows found in the table."
+        | TableParseError (ParseError msg) -> "Error parsing table:\n-----\n{msg}"
+
 module OnboardAiStructures =
 
     let Run(context: ScriptContext) =
@@ -36,39 +48,9 @@ module OnboardAiStructures =
 
         HtmlOutput.initializeHtml()
 
-        match getData(url) with
-        | TableParseResult tableResult ->  // Assuming TableParseResult contains the (string * string) list
-            
-            match tableResult with
-            | ParsedTableData pairs ->
-                pairs
-                |> List.map processPair  // Apply processPair to each tuple in the list
-                |> List.iter processResult  // Print each result to the console
-
-            | NoTableFound ->
-                MessageBox.Show("Error: No table found in the HTML.") |> ignore
-
-            | NoRowsFound ->
-                MessageBox.Show("Error: No rows found in the table.") |> ignore
-
-            | ParseError msg ->
-                MessageBox.Show( $"Error parsing table:\n-----\n{msg}") |> ignore
-
-        | UnexpectedHttpResponse responseCode ->
-            MessageBox.Show( $"Error: The server returned an unexpected response status code: {responseCode}") |> ignore
-
-        | JsonParsingError msg ->
-            MessageBox.Show( $"Error parsing JSON:\n-----\n{msg}") |> ignore
-
-        | HtmlParsingError msg ->
-            MessageBox.Show( $"Error parsing HTML:\n-----\n{msg}") |> ignore
-
-        | ProcessError msg ->
-            MessageBox.Show( $"Process error:\n-----\n{msg}") |> ignore
-
-        | UnexpectedError msg ->
-            MessageBox.Show( $"Unexpected error:\n-----\n{msg}") |> ignore
+        getData(url)
+        |> Result.mapError( DataBaseAccessError.message >> MessageBox.Show >>ignore)
+        |> Result.map(List.iter (processPair>> processResult))
+        |> ignore
 
         HtmlOutput.finalizeAndDisplayHtml()
-
-    
