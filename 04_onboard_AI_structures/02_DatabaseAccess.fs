@@ -33,7 +33,7 @@ let executeHttpRequest (url: string) =
             |> Async.AwaitTask
             |> Async.RunSynchronously
             |> Ok
-            else
+        else
             Error response.StatusCode
 /// Parses HTML content from JSON.
 let parseHtmlFromJson output =
