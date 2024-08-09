@@ -24,7 +24,7 @@
 
 - **First-Class Functions:** Functions can be composed, half-baked, passed as arguments, and manipulated with ease.
 
-- **Pattern Matching and Lists:** Offers a cleaner alternative to traditional control structures. You dont have to write any "if statements" or "for loops". Take your time, let that sink in. 
+- **Pattern Matching and Lists:** Offers a cleaner alternative to traditional control structures. You dont have to write nested "if statements" or "for loops". Take your time, let that sink in. 
 
 - **Strong Typing:** Ensures everything is checked before compile time. If I can write it, it works.
 
