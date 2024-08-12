@@ -1,4 +1,4 @@
-﻿namespace VMS.TPS
+namespace VMS.TPS
 
 open HtmlAgilityPack
 open System
@@ -6,12 +6,13 @@ open System
 /// Module for parsing HTML tables into tuples of string data.
 module TableParser =
 
-    /// Represents the result of parsing the structure pairs table.
-    type TableParseResult =
-        | ParsedTableData of (string * string) list
+    type TableParseError =
         | NoTableFound
         | NoRowsFound
         | ParseError of string
+
+    /// Represents the result of parsing the structure pairs table.
+    type TableParseResult = Result<(string * string) list, TableParseError>
 
     /// Loads HTML from a string.
     let loadHtml html =
@@ -46,20 +47,13 @@ module TableParser =
         
         // Attempt to find a table with the class 'wikitable'.
         match table with
-        | null -> NoTableFound
-        
+        | null -> Error NoTableFound
+
         | table ->
             // Attempt to extract all rows from the table.
             let rows = extractRows table
-            match rows with
-            | null -> NoRowsFound
-            
-            | rows ->
-                rows 
-                |> Seq.cast
-                |> Seq.choose extractCells
-                |> Seq.toList
-                |> ParsedTableData
-        
 
-        
+            match rows with
+            | null -> Error NoRowsFound
+
+            | rows -> rows |> Seq.cast |> Seq.choose extractCells |> Seq.toList |> Ok
