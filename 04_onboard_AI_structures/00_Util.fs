@@ -1,4 +1,4 @@
-module VMS.TPS.Util
+namespace VMS.TPS
 
 module Result =
 
