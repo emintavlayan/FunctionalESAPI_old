@@ -6,13 +6,13 @@ open System
 /// Module for parsing HTML tables into tuples of string data.
 module TableParser =
 
-    type TableParseError =
+    /// Represents the result of parsing the structure pairs table.
+    type TableParseResult = Result<(string * string) list, TableParseError>
+
+    and TableParseError =
         | NoTableFound
         | NoRowsFound
         | ParseError of string
-
-    /// Represents the result of parsing the structure pairs table.
-    type TableParseResult = Result<(string * string) list, TableParseError>
 
     /// Loads HTML from a string.
     let loadHtml html =
@@ -56,4 +56,8 @@ module TableParser =
             match rows with
             | null -> Error NoRowsFound
 
-            | rows -> rows |> Seq.cast |> Seq.choose extractCells |> Seq.toList |> Ok
+            | rows -> rows 
+                |> Seq.cast 
+                |> Seq.choose extractCells 
+                |> Seq.toList 
+                |> Ok
