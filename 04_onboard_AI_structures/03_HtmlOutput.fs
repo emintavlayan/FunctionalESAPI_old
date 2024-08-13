@@ -1,21 +1,20 @@
 ﻿namespace VMS.TPS
 
-open System
 open System.IO
 open System.Diagnostics
 
 module HtmlOutput =
 
-    /// Result type for HTML output operations
+    /// Unified result type for the module
     type HtmlOutputResult<'T> = Result<'T, HtmlOutputError>
-
+    
     and HtmlOutputError =
         | HtmlWriteError of string
         | FileAppendError of string
         | ProcessError of string
-
-    /// Creates an HTML header with a custom title
-    let private htmlHeader = 
+    
+    /// HTML header template
+    let private htmlHeader : string = 
         sprintf """
         <!DOCTYPE html>
         <html>
@@ -59,50 +58,43 @@ module HtmlOutput =
         """
     
     /// HTML footer template
-    let private htmlFooter = "</table></body></html>"
+    let private htmlFooter : string = "</table></body></html>"
+
+    // Configurable file path and name
+    let tempPath : string = Path.GetTempPath()
+    let htmlFileName : string = "output.html"
+    let htmlFilePath : string = Path.Combine(tempPath, htmlFileName)
     
-    /// Configurable file path and name
-    let private tempPath = Path.GetTempPath()
-    let private htmlFileName = "output.html"
-    let private htmlFilePath = Path.Combine(tempPath, htmlFileName)
-    
-    /// Writes content to a file
-    let private writeFileToTemp (path: string) (content: string) : HtmlOutputResult<unit> =
+    /// Initializes the HTML output by creating or overwriting the HTML file with the header
+    let writeHeaderToHtml (path: string) : HtmlOutputResult<unit> =
         try
-            File.WriteAllText(path, content)
+            File.WriteAllText(path, htmlHeader)
             Ok ()
         with
         | ex -> Error (HtmlWriteError $"Failed to write to file: {ex.Message}")
     
-    /// Appends content to a file
-    let private appendToFile (path: string) (content: string) : HtmlOutputResult<unit> =
+    /// Appends a table row to the HTML file
+    let appendStructureOperationResultsToHtmlTable (path: string) (aiId, rhId, message) : HtmlOutputResult<unit> =
+        let row = sprintf "<tr><td>%s</td><td>%s</td><td>%s</td></tr>" aiId rhId message
         try
-            File.AppendAllText(path, content)
+            File.AppendAllText(path, row)
             Ok ()
         with
         | ex -> Error (FileAppendError $"Failed to append to file: {ex.Message}")
-
-    /// Starts a process to display the HTML file
-    let private startProcess (path: string) : HtmlOutputResult<unit> =
+    
+    /// Finalizes the HTML output by closing HTML tags
+    let writeFooterToHtml (path: string) : HtmlOutputResult<unit> =
+        try
+            File.WriteAllText(path, htmlFooter)
+            Ok ()
+        with
+        | ex -> Error (HtmlWriteError $"Failed to write to file: {ex.Message}")
+    
+    /// Displays the Html with the default browser.
+    let displayHtml (path: string) : HtmlOutputResult<unit> =
         try
             let psi = ProcessStartInfo(FileName = path, UseShellExecute = true)
             Process.Start(psi) |> ignore
             Ok ()
         with
         | ex -> Error (ProcessError $"Failed to start process: {ex.Message}")
-    
-    /// Initializes the HTML output by creating or overwriting the HTML file with the header
-    let initializeHtml () =
-        htmlHeader 
-        |> writeFileToTemp htmlFilePath
-        |> ignore
-    
-    /// Appends a table row to the HTML file
-    let appendTableRow (aiId, rhId, message) =
-        let row = sprintf "<tr><td>%s</td><td>%s</td><td>%s</td></tr>" aiId rhId message
-        appendToFile htmlFilePath row
-    
-    /// Finalizes the HTML output by closing HTML tags and opening the file in a browser
-    let finalizeAndDisplayHtml () : HtmlOutputResult<unit> =
-        appendToFile htmlFilePath htmlFooter
-        |> Result.bind (fun _ -> startProcess htmlFilePath)

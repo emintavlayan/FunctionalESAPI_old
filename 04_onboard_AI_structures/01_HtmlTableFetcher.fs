@@ -5,20 +5,19 @@ open System
 open Newtonsoft.Json.Linq
 open System.Net.Http
 
-/// Unified result type for the module
-type FetchResult<'T> = Result<'T, FetchError>
-
-/// Error types in the order of occurrence
-and FetchError =
-    | HttpRequestFailed of string
-    | JsonParsingFailed of string
-    | HtmlParsingFailed of string
-    | TableNotFound of string
-    | RowsNotFound of string
-    | CellExtractionFailed of string
-
 module HtmlTableFetcher =
 
+    /// Unified result type for the module
+    type FetchResult<'T> = Result<'T, FetchError>
+    
+    and FetchError =
+        | HttpRequestFailed of string
+        | JsonParsingFailed of string
+        | HtmlParsingFailed of string
+        | TableNotFound of string
+        | RowsNotFound of string
+        | CellExtractionFailed of string
+    
     /// Makes an HTTP request to a URL and returns the response content.
     let fetchHtmlContent (url: string) : FetchResult<string> =
         try
@@ -64,26 +63,35 @@ module HtmlTableFetcher =
         | null -> Error (RowsNotFound "No rows found in the table.")
         | _ -> Ok rows
 
+    /// Validates if a string is non-null, non-whitespace, and non-empty.
+    let isValidString (str: string) : bool =
+        not (String.IsNullOrWhiteSpace(str))
+    
+    /// Extracts cell values from a row if it contains at least two valid cells.
+    let extractTupleFromRow (row: HtmlNode) : option<(string * string)> =
+        match row.SelectNodes(".//td") with
+        | null -> None
+        | cells when cells.Count < 2 -> None
+        | cells ->
+            let cell1 = cells.[0].InnerText.Trim()
+            let cell2 = cells.[1].InnerText.Trim()
+            
+            match isValidString cell1, isValidString cell2 with
+            | true, true -> Some (cell1, cell2)
+            | _ -> None
+    
     /// Extracts tuples of data from table rows.
     let extractTuplesFromRows (rows: HtmlNodeCollection) : FetchResult<(string * string) list> =
         let tuples = 
             rows
             |> Seq.cast<HtmlNode>
-            |> Seq.choose (fun row ->
-                let cells = row.SelectNodes(".//td")
-                if cells <> null && cells.Count >= 2 then
-                    let cell1 = cells.[0].InnerText.Trim()
-                    let cell2 = cells.[1].InnerText.Trim()
-                    if not (String.IsNullOrWhiteSpace(cell1)) && not (String.IsNullOrWhiteSpace(cell2)) then
-                        Some (cell1, cell2)
-                    else None
-                else None)
+            |> Seq.choose extractTupleFromRow
             |> Seq.toList
 
-        if tuples.IsEmpty then 
-            Error (CellExtractionFailed "Failed to extract any valid tuples from rows.")
-        else 
+        if not (tuples.IsEmpty) then 
             Ok tuples
+        else 
+            Error (CellExtractionFailed "Failed to extract any valid tuples from rows.")
 
     /// Main function to fetch, parse, and return data from a URL as a list of tuples.
     let fetchTableData (url: string) : FetchResult<(string * string) list> =

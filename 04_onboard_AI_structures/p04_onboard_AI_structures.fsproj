@@ -9,7 +9,6 @@
     <Version>1.2024.523.1124</Version>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="00_Util.fs" />
     <None Include="App.config" />
     <Compile Include="01_HtmlTableFetcher.fs" />
     <Compile Include="02_StructureOperations.fs" />
