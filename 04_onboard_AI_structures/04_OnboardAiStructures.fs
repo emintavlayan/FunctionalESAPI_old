@@ -26,7 +26,7 @@ module OnboardAiStructures =
         HtmlOutput.initializeHtml()
 
         fetchTableData(url)
-        |> Result.mapError(  MessageBox.Show >> ignore)
+        |> Result.mapError( FetchError.message >> MessageBox.Show >> ignore)
         |> Result.map(List.iter (processAndLogPair ss))
         |> ignore
 
