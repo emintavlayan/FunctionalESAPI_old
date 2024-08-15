@@ -3,6 +3,7 @@
 open VMS.TPS.Common.Model.API
 open FsToolkit.ErrorHandling
 open System
+open System.Windows.Forms
 open System.Text.RegularExpressions
 
 module StructureOperations =
@@ -58,28 +59,34 @@ module StructureOperations =
             target.SegmentVolume <- source.SegmentVolume
             Ok ()
         with
-        | ex -> Error (CopyVolumeFailed $"Copy Volume operation failed:{ ex.Message}" )
-
+        | ex -> 
+            Error (CopyVolumeFailed $"Copy Volume operation failed:{ ex.Message}" ) 
+    
     /// Removes a structure from a StructureSet if its DicomType is not empty.
     let safeRemoveStructure (ss: StructureSet) (structure: Structure) : unit =
         if not (String.IsNullOrWhiteSpace(structure.DicomType)) then
             ss.RemoveStructure(structure)
 
-    /// Main function to search, validate, and copy structure volume.
+    ///// Main function to search, validate, and copy structure volume.
     let copyStructureVolume (ss: StructureSet) (aiId: string) (rhId: string) : StructureOperationResult<string> =
 
         result {
             // Find the AI structure by its ID and ensure it has significant volume
-            let! aiStructure = findStructureByIdNormalized aiId ss |> Result.bind validateAiStrHasVolume
-            
+            let! aiStructure = 
+                findStructureByIdNormalized aiId ss 
+                |> Result.bind validateAiStrHasVolume
+                
             // Find the RH structure by its ID and ensure it is empty
-            let! rhStructure = findStructureByIdNormalized  rhId ss |> Result.bind validateRhStrIsEmpty
-
+            let! rhStructure = 
+                findStructureByIdNormalized  rhId ss 
+                |> Result.bind validateRhStrIsEmpty
+               
             // Safely copy the volume from the AI structure to the RH structure
-            do! safeCopyVolume aiStructure rhStructure
-            
+            do! safeCopyVolume aiStructure rhStructure 
+        
             // Attempt to remove aiStructure, but ignore any errors since copying is our main concern
             safeRemoveStructure ss aiStructure |> ignore
-            
+        
             return $"Volume has been copied successfully."
-        }
+        } 
+    

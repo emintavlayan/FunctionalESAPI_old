@@ -6,7 +6,8 @@
     <PlatformTarget>x64</PlatformTarget>
     <AssemblyName>onboard_AI_structures.esapi</AssemblyName>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2024.523.1124</Version>
+    <Version>1.2024.815.1620</Version>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -18,8 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FsToolkit.ErrorHandling" Version="4.16.0" />
-    <PackageReference Include="FsToolkit.ErrorHandling.TaskResult" Version="4.16.0" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.60" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.63" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
@@ -31,5 +31,8 @@
     <Reference Include="VMS.TPS.Common.Model.Types">
       <HintPath>C:\Program Files (x86)\Varian\RTM\18.0\esapi\API\VMS.TPS.Common.Model.Types.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="8.0.400" />
   </ItemGroup>
 </Project>

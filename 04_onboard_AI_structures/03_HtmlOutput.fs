@@ -2,6 +2,8 @@
 
 open System.IO
 open System.Diagnostics
+open FsToolkit.ErrorHandling
+open System.Windows.Forms
 
 module HtmlOutput =
 
@@ -80,12 +82,12 @@ module HtmlOutput =
             File.AppendAllText(path, row)
             Ok ()
         with
-        | ex -> Error (FileAppendError $"Failed to append to file: {ex.Message}")
-    
+        | ex -> Error (FileAppendError $"Failed to append to file: {ex.Message}") 
+           
     /// Finalizes the HTML output by closing HTML tags
     let writeFooterToHtml (path: string) : HtmlOutputResult<unit> =
         try
-            File.WriteAllText(path, htmlFooter)
+            File.AppendAllText(path, htmlFooter)
             Ok ()
         with
         | ex -> Error (HtmlWriteError $"Failed to write to file: {ex.Message}")

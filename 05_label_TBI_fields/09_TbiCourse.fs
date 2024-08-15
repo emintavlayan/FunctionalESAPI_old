@@ -4,12 +4,12 @@ namespace VMS.TPS
 open VMS.TPS.Common.Model.API
 open VMS.TPS.Common.Model.Types
 
-open TbiPlanId
-open TbiTypes
-open TbiPlanId.TbiPlanIdParser
-open TbiPlanId.ActivePatternsForTbiPlanIds
+//open TbiPlanId
+//open TbiTypes
+//open TbiPlanId.TbiPlanIdParser
+//open TbiPlanId.ActivePatternsForTbiPlanIds
 
-open TbiPlans
+//open TbiPlans
 
 module TbiCourse =
 

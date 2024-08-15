@@ -10,14 +10,14 @@ open System.Runtime.CompilerServices
 module ActivePatterns = 
     
     /// Checks if two strings are equal.
-    let (|Equal|_|) s1 s2 =
+    let (|Equal|_|) (s1:string) (s2: string) =
         if s1.Equals(s2) 
         then Some ()  // Option type 
         else None     // valubale stuff
 
     /// Checks if both strings are variations of 'bowel'
     /// example: 'Bowel', 'BowelBag' or 'SmallBowel'.
-    let (|BothAreBowel|_|) s1 s2 =
+    let (|BothAreBowel|_|) (s1:string) (s2: string) =
         
         if  (s1.Contains("bowel")) && (s2.Contains("bowel"))
         then Some () 
@@ -25,17 +25,17 @@ module ActivePatterns =
     
     /// Checks if two strings are the same except one have a direction suffix.
     /// example: ( Parotis, Parotis-L) (Lung_Right, Lung)
-    let (|HasLeftRightSuffix|_|) s1 s2 = 
+    let (|HasLeftRightSuffix|_|) (s1:string) (s2: string) = 
         
         // Checks if a string ends with a direction suffix
-        let hasDirectionSuffix s = 
+        let hasDirectionSuffix (s: string)= 
             s.EndsWith("l")    || 
             s.EndsWith("left") || 
             s.EndsWith("r")    || 
             s.EndsWith("right")
 
         // Strips the string off the direction suffix
-        let baseOf b =
+        let baseOf (b: string)=
 
             if b.EndsWith("left") 
                 then b.Substring(0, b.Length - 4)  // remove last 4 chars

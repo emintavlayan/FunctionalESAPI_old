@@ -14,6 +14,3 @@ type Script() =
 
         OnboardAiStructures.Run(context)
        
-
-
-        
