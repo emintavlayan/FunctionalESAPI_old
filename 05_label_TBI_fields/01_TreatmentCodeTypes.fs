@@ -6,7 +6,7 @@ namespace VMS.TPS
 module TreatmentCodeTypes =
 
     /// Represents the unique identifier for a treatment code.
-    type TreatmentCodeId = TreatmentCodeId of string
+    type TreatmentCode = TreatmentCode of string
 
     /// Represents the description associated with a treatment code.
     type Description = Description of string
