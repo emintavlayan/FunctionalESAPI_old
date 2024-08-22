@@ -1,5 +1,7 @@
-// File: TbiPlanIdTypes.fs
+// File: TbiPlanTypes.fs
 namespace VMS.TPS
+
+open System
 
 /// Defines types necessary for constructing and representing TBI (Total Body Irradiation) Plan IDs and related entities.
 module TbiTypes =
@@ -16,7 +18,7 @@ module TbiTypes =
     /// Represents the ID for a TBI planning plan, consisting of a treatment code and a version number.
     type TbiPlanningPlanId = {
         /// The treatment code ID associated with the planning plan.
-        TreatmentCodeId: TreatmentCode
+        TreatmentCode: TreatmentCode
         /// The version number of the planning plan.
         VersionNumber: VersionNumber
     }
@@ -24,7 +26,7 @@ module TbiTypes =
     /// Represents the ID for a TBI treatment plan, including treatment code, dose information, and version number.
     type TbiTreatmentPlanId = {
         /// The treatment code ID associated with the treatment plan.
-        TreatmentCodeId: TreatmentCode
+        TreatmentCode: TreatmentCode
         /// Detailed dose information for the treatment plan.
         DoseInformation: DoseInformation
         /// The version number of the treatment plan.
@@ -40,8 +42,6 @@ module TbiTypes =
         PlanId: TbiPlanningPlanId
         /// The list of beam IDs associated with the planning plan.
         BeamIds: TbiBeamId list
-        /// A boolean value indicating whether the beams are ordered.
-        BeamsAreOrdered: bool
     }
 
     /// Represents a TBI treatment plan, including its ID, associated beams, and whether the beams are ordered.
@@ -50,9 +50,10 @@ module TbiTypes =
         PlanId: TbiTreatmentPlanId
         /// The list of beam IDs associated with the treatment plan.
         BeamIds: TbiBeamId list
-        /// A boolean value indicating whether the beams are ordered.
-        BeamsAreOrdered: bool
+        
     }
 
     /// Represents a course of TBI treatment, consisting of a planning plan and a treatment plan.
-    type TbiCourse = TbiPlanningPlan * TbiTreatmentPlan
+    type TbiPlanPair = TbiPlanningPlan * TbiTreatmentPlan
+
+    

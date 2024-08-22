@@ -5,19 +5,19 @@ open System
 open Newtonsoft.Json.Linq
 open System.Net.Http
 
+/// Unified result type for the module
+type FetchResult<'T> = Result<'T, FetchError>
+
+and FetchError =
+    | HttpRequestFailed of string
+    | JsonParsingFailed of string
+    | HtmlParsingFailed of string
+    | TableNotFound of string
+    | RowsNotFound of string
+    | CellExtractionFailed of string
+
 module HtmlTableFetcher =
 
-    /// Unified result type for the module
-    type FetchResult<'T> = Result<'T, FetchError>
-    
-    and FetchError =
-        | HttpRequestFailed of string
-        | JsonParsingFailed of string
-        | HtmlParsingFailed of string
-        | TableNotFound of string
-        | RowsNotFound of string
-        | CellExtractionFailed of string
-    
     /// Makes an HTTP request to a URL and returns the response content.
     let fetchHtmlContent (url: string) : FetchResult<string> =
         try

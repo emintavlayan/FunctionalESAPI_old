@@ -1,34 +1,19 @@
 ﻿namespace VMS.TPS
 
-open System
-open System.Windows.Forms      // Required for MessageBox.Show
+open System.Windows.Forms      
 open VMS.TPS.Common.Model.API
 open FsToolkit.ErrorHandling
-open System.Linq
 
-
-open HtmlTableFetcher
-open StructureOperations
 open HtmlOutput
 
-open HtmlAgilityPack
-open Newtonsoft.Json
+/// Higher-level result type that aggregates results and errors from all modules.
+type OnboardingResult<'T> = Result<'T,OnboardingError>
 
-// Simple JSON Serialization and Deserialization Example
-
- type Person = {
-     Name: string
-     Age: int
- }
+and OnboardingError =
+| FetchError of FetchError
+| HtmlOutputError of HtmlOutputError
 
 module OnboardAiStructures =
-
-    /// Higher-level result type that aggregates results and errors from all modules.
-    type OnboardingResult<'T> = Result<'T,OnboardingError>
-
-    and OnboardingError =
-    | FetchError of FetchError
-    | HtmlOutputError of HtmlOutputError
 
     /// Processes a single pair of structure IDs, attempts to copy volume, and logs the result to the Html
     let processAndLogPair (ss: StructureSet) (aiId: string) (rhId: string) =
@@ -43,7 +28,7 @@ module OnboardAiStructures =
         |> Result.mapError OnboardingError.HtmlOutputError
     
     /// Runs the main Onboarding Workflow
-    let Run(context: ScriptContext) =
+    let run(context: ScriptContext) =
 
         let url = "http://rghrhkfedoc001/radiowiki/api.php?action=parse&format=json&page=DcmCollab_AI_Autosegmentering_af_HH&prop=text"
         let ss = context.StructureSet

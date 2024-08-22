@@ -5,16 +5,16 @@ open System.Diagnostics
 open FsToolkit.ErrorHandling
 open System.Windows.Forms
 
+/// Unified result type for the module
+type HtmlOutputResult<'T> = Result<'T, HtmlOutputError>
+
+and HtmlOutputError =
+    | HtmlWriteError of string
+    | FileAppendError of string
+    | ProcessError of string
+
 module HtmlOutput =
 
-    /// Unified result type for the module
-    type HtmlOutputResult<'T> = Result<'T, HtmlOutputError>
-    
-    and HtmlOutputError =
-        | HtmlWriteError of string
-        | FileAppendError of string
-        | ProcessError of string
-    
     /// HTML header template
     let private htmlHeader : string = 
         sprintf """

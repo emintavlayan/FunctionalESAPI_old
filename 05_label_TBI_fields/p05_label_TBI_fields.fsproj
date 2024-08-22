@@ -10,7 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="01_TreatmentCodeTypes.fs" />
+    <Compile Include="01_TbiPlanTypes.fs" />
+    <Compile Include="02_Utility.fs" />
+    <Compile Include="03_GatheringPlans.fs" />
     <Compile Include="02_TbiPlanIdTypes.fs" />
     <Compile Include="03_Patterns.fs" />
     <Compile Include="04_DomainErrors.fs" />
@@ -23,11 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EvilDICOM" Version="2.0.6.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\04_onboard_AI_structures\p04_onboard_AI_structures.fsproj" />
+    <PackageReference Include="EvilDICOM" Version="3.0.8998.340" />
+    <PackageReference Include="FsToolkit.ErrorHandling" Version="4.16.0" />
   </ItemGroup>
 
   <ItemGroup>

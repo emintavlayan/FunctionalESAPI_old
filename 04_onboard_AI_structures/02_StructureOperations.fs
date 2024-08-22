@@ -6,19 +6,20 @@ open System
 open System.Windows.Forms
 open System.Text.RegularExpressions
 
+/// Unified result type for the module
+type StructureOperationResult<'T> = Result<'T, StructureOperationError>
+
+and StructureOperationError =
+    | StructureNotFound of string
+    | AiStructureIsEmpty of string
+    | RhStructureIsNotEmpty of string
+    | CopyVolumeFailed of string
+    | RemoveStructureFailed of string
+    | UnexpectedError of string
+
+/// 
 module StructureOperations =
 
-    /// Unified result type for the module
-    type StructureOperationResult<'T> = Result<'T, StructureOperationError>
-    
-    and StructureOperationError =
-        | StructureNotFound of string
-        | AiStructureIsEmpty of string
-        | RhStructureIsNotEmpty of string
-        | CopyVolumeFailed of string
-        | RemoveStructureFailed of string
-        | UnexpectedError of string
-        
     /// Strips non-alphanumeric characters from a string and converts it to lowercase.
     let normalizeString (input: string) : string =
         let alphanumericOnly = Regex.Replace(input, "[^a-zA-Z0-9]", "")
