@@ -10,17 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="01_TbiPlanTypes.fs" />
-    <Compile Include="02_Utility.fs" />
-    <Compile Include="03_GatheringPlans.fs" />
-    <Compile Include="02_TbiPlanIdTypes.fs" />
-    <Compile Include="03_Patterns.fs" />
-    <Compile Include="04_DomainErrors.fs" />
-    <Compile Include="05_TbiTreatmentCodeDb.fs" />
-    <Compile Include="06_TreatmentCode.fs" />
-    <Compile Include="07_TbiPlanId.fs" />
-    <Compile Include="08_TbiPlans.fs" />
-    <Compile Include="09_TbiCourse.fs" />
+    <Compile Include="01_Utility.fs" />
+    <Compile Include="02_TbiPlanTypes.fs" />
+    <Compile Include="03_PlanCollection.fs" />
+    <Compile Include="04_CourseIntegrityCheck.fs" />
     <Compile Include="10_Main.fs" />
   </ItemGroup>
 
