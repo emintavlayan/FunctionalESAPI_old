@@ -20,7 +20,7 @@ module PlanCollecting =
             course.PlanSetups
             |> Seq.filter ( fun plan -> plan.Id.ToLowerInvariant().StartsWith("tb"))
             |> Seq.sortByDescending (fun plan -> plan.HistoryDateTime)
-            |> Seq.take 2
+            |> Seq.truncate 2
             |> Seq.toList
     
         match planSetups with

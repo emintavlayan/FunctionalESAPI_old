@@ -6,7 +6,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <AssemblyName>onboard_AI_structures.esapi</AssemblyName>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2024.822.1103</Version>
+    <Version>1.2024.826.106</Version>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
