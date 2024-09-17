@@ -46,7 +46,7 @@ module PlanCollecting =
         let planIds = 
             course.PlanSetups 
             |> Seq.map (fun p -> p.Id)        // create id seq instead of real plans
-            |> Seq.toArray                                     // convert into an array for UI purposes
+            |> Seq.toArray                       // convert into an array for UI purposes
             |> Array.map (fun id -> id :> obj)  // upcast strings to objects ?!?!
 
         planningDropdown.Items.AddRange(planIds)
