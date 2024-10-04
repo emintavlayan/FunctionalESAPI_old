@@ -49,7 +49,7 @@ module OnboardAiStructures =
                         (aiId, rhId, StructureOperations.copyStructureVolume ss aiId rhId)
                     )
 
-               do! writeHtml outputPath structureCopyResults |> Result.mapError HtmlOutputError
+               do! writeAndDisplayHtml outputPath ss.Id structureCopyResults |> Result.mapError HtmlOutputError
                     
             }
         

@@ -111,7 +111,7 @@ module HtmlOutput =
         | ex -> Error  ex.Message
    
 
-    let writeHtml htmlFilePath ssid (structureCopyResults: (string*string*_) list) = result {
+    let writeAndDisplayHtml htmlFilePath ssid (structureCopyResults: (string*string*_) list) = result {
             // Write the HTML header to start the output file
             do! writeHeaderToHtml htmlFilePath ssid |> Result.mapError HtmlOutputError.HtmlWriteError
             
