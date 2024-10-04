@@ -64,9 +64,22 @@ module StructureOperations =
             Error (CopyVolumeFailed $"Copy Volume operation failed:{ ex.Message}" ) 
     
     /// Removes a structure from a StructureSet if its DicomType is not empty.
-    let safeRemoveStructure (ss: StructureSet) (structure: Structure) : unit =
+    let safeRemoveStructure (ss: StructureSet) (structure: Structure) : string =
         if not (String.IsNullOrWhiteSpace(structure.DicomType)) then
-            ss.RemoveStructure(structure)
+            ss.RemoveStructure(structure) |> ignore
+            " Removed."
+        else    
+            " NOT Removed"
+
+
+    /// Tries to make structure high resolution
+    let tryAllToHighResolution (ss : StructureSet) : unit =
+        ss.Structures
+        |> Seq.filter ( fun s -> not s.IsHighResolution )
+        |> Seq.filter ( fun s -> s.CanConvertToHighResolution())
+        |> Seq.map ( fun s -> s.ConvertToHighResolution())
+        |> ignore
+
 
     ///// Main function to search, validate, and copy structure volume.
     let copyStructureVolume (ss: StructureSet) (aiId: string) (rhId: string) : StructureOperationResult<string> =
@@ -86,8 +99,11 @@ module StructureOperations =
             do! safeCopyVolume aiStructure rhStructure 
         
             // Attempt to remove aiStructure, but ignore any errors since copying is our main concern
-            safeRemoveStructure ss aiStructure |> ignore
+            let removeMessage = safeRemoveStructure ss aiStructure
+
+            // Attempt to make every structure high resolution ---- NOT IMPLEMENTED YET ----
+            //tryAllToHighResolution(ss)
         
-            return $"Volume has been copied successfully."
+            return ( $"Volume has been copied successfully." + removeMessage )
         } 
     

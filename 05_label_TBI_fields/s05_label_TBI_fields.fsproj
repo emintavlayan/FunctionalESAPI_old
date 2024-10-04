@@ -7,13 +7,24 @@
     <AssemblyName>$(MSBuildProjectName).esapi</AssemblyName>
     <RootNamespace>VMS.TPS</RootNamespace>
     <PlatformTarget>x64</PlatformTarget>
+    <OutputType>Library</OutputType>
+    <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
+    <Version>1.2024.912.1636</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="index.html" />
+    <Compile Include="NodeTypes.fs" />
+    <Compile Include="JsHelpers.fs" />
+    <Compile Include="Fs4Js.fs" />
+    <Compile Include="00_WebUI.fs" />
     <Compile Include="01_Utility.fs" />
     <Compile Include="02_TbiPlanTypes.fs" />
     <Compile Include="03_PlanCollection.fs" />
     <Compile Include="04_CourseIntegrityCheck.fs" />
+    <Compile Include="Model.fs" />
+    <Compile Include="View.fs" />
+    <Compile Include="Update.fs" />
     <Compile Include="10_Main.fs" />
   </ItemGroup>
 
@@ -29,6 +40,9 @@
     </Reference>
     <Reference Include="VMS.TPS.Common.Model.Types">
       <HintPath>C:\Program Files (x86)\Varian\RTM\18.0\esapi\API\VMS.TPS.Common.Model.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="WebUI4CSharp_net48">
+      <HintPath>..\WebUI\WebUI4CSharp_net48\bin\Debug\WebUI4CSharp_net48.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

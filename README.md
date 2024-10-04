@@ -84,6 +84,6 @@ module StructureSearch =
 
 - [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/) by Scott Wlaschin
 
-- [Essential F#](https://leanpub.com/essential-fsharp) by Ian Russell
-
 - [Get Programming with F#: A guide for .NET developers](https://www.manning.com/books/get-programming-with-f-sharp) by Isaac Abraham
+
+- [Essential F#](https://leanpub.com/essential-fsharp) by Ian Russell

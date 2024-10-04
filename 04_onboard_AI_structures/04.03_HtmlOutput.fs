@@ -3,6 +3,9 @@
 open System.IO
 open System.Diagnostics
 open FsToolkit.ErrorHandling
+open System.Windows.Forms
+open VMS.TPS.Common.Model.Types
+open VMS.TPS.Common.Model.API
 
 /// Unified result type for the module
 type HtmlOutputResult<'T> = Result<'T, HtmlOutputError>
@@ -23,12 +26,12 @@ module HtmlOutputError =
 module HtmlOutput =
 
     /// HTML header template
-    let private htmlHeader : string = 
+    let createHtmlHeader (structureSetId : string ): string = 
         sprintf """
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Volume Move Results</title>
+            <title>Volume Move Results </title>
             <style>
                 body {
                     margin-left: 5%%;
@@ -62,17 +65,18 @@ module HtmlOutput =
         </head>
         <body>
             <h1>Volume Move Results</h1>
+            <h2>StructureSet: %s</h2>
             <table>
                 <tr><th>AI Structure ID</th><th>RH Structure ID</th><th>Operation Result Message</th></tr>
-        """
+        """ structureSetId
     
     /// HTML footer template
     let private htmlFooter : string = "</table></body></html>"
     
     /// Initializes the HTML output by creating or overwriting the HTML file with the header
-    let writeHeaderToHtml (path: string)  =
+    let writeHeaderToHtml (ssId: string) (path: string) =
         try
-            File.WriteAllText(path, htmlHeader)
+            File.WriteAllText(path, createHtmlHeader ssId)
             Ok ()
         with
         | ex -> Error ex.Message
@@ -107,9 +111,9 @@ module HtmlOutput =
         | ex -> Error  ex.Message
    
 
-    let writeHtml htmlFilePath (structureCopyResults: (string*string*_) list) = result {
+    let writeHtml htmlFilePath ssid (structureCopyResults: (string*string*_) list) = result {
             // Write the HTML header to start the output file
-            do! writeHeaderToHtml(htmlFilePath) |> Result.mapError HtmlOutputError.HtmlWriteError
+            do! writeHeaderToHtml htmlFilePath ssid |> Result.mapError HtmlOutputError.HtmlWriteError
             
             for copyResult in structureCopyResults do
                 do!

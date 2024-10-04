@@ -6,16 +6,16 @@
     <PlatformTarget>x64</PlatformTarget>
     <AssemblyName>onboard_AI_structures.esapi</AssemblyName>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2024.822.1103</Version>
+    <Version>1.2024.911.1107</Version>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Compile Include="01_HtmlTableFetcher.fs" />
-    <Compile Include="02_StructureOperations.fs" />
-    <Compile Include="03_HtmlOutput.fs" />
-    <Compile Include="04_OnboardAiStructures.fs" />
-    <Compile Include="05_Main.fs" />
+    <Compile Include="04.01_HtmlTableFetcher.fs" />
+    <Compile Include="04.02_StructureOperations.fs" />
+    <Compile Include="04.03_HtmlOutput.fs" />
+    <Compile Include="04.04_OnboardAiStructures.fs" />
+    <Compile Include="04.05_Main.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FsToolkit.ErrorHandling" Version="4.16.0" />

@@ -5,16 +5,16 @@ open Utility
 open FsToolkit.ErrorHandling
 
 /// Represents the ID for a TBI planning plan, consisting of a treatment code and a version number.
-type TbiPlanningPlanId = TbiPlanningPlanId of string with
+type TbiPlanningPlanId = TbiPlanningPlanId of string //with
     
-    member this.Value = let (TbiPlanningPlanId id) = this in id
+    //member this.Value = let (TbiPlanningPlanId id) = this in id
 
-    // string -> Result<TbiPlanningPlanId, string>
-    static member TryCreate (id : string) =
-        let txCode = first5Chars id
-        if not (txCode.ToLower().StartsWith("tb")) then
-            Error "plan id must start with: TB"
-        elif 
+    //// string -> Result<TbiPlanningPlanId, string>
+    //static member TryCreate (id : string) =
+    //    let txCode = first5Chars id
+    //    if not (txCode.ToLower().StartsWith("tb")) then
+    //        Error "plan id must start with: TB"
+    //    elif 
 
 
 /// Represents the ID for a TBI treatment plan, including treatment code, dose information, and version number.

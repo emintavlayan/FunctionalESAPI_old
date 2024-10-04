@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework> 
 
@@ -6,18 +6,15 @@
     <WarnOn>3390;$(WarnOn)</WarnOn>
     <AssemblyName>$(MSBuildProjectName).esapi</AssemblyName>
     <PlatformTarget>x64</PlatformTarget>
-    <BaseOutputPath></BaseOutputPath>
-    <PackageOutputPath>..\..\plugins</PackageOutputPath>
+    <BaseOutputPath>bin\</BaseOutputPath>
   </PropertyGroup>
-  <ItemGroup>
-    <EmbeddedResource Remove="Properties\**" />
-  </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="01_FieldSizeValidation.fs" />
-    <Compile Include="02_ImagerPositionCalculation.fs" />
-    <Compile Include="03_Main.fs" />
+    <None Include="README.md" />
+    <Compile Include="03.01_list_HIGH_RESOLUTION_structures.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />
