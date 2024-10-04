@@ -3,6 +3,7 @@
 open System.Windows.Forms      
 open VMS.TPS.Common.Model.API
 open FsToolkit.ErrorHandling
+open System.IO
 
 open HtmlOutput
 
@@ -13,25 +14,26 @@ and OnboardingError =
 | FetchError of FetchError
 | HtmlOutputError of HtmlOutputError
 
+module OnboardingError =
+    
+    let message =
+        function
+        | FetchError e -> $"Failed to fetch data: {FetchError.message e}"
+        | HtmlOutputError e -> $"Failed to prepare HTML: {e}"
+            
+
 module OnboardAiStructures =
 
-    /// Processes a single pair of structure IDs, attempts to copy volume, and logs the result to the Html
-    let processAndLogPair (ss: StructureSet) (aiId: string) (rhId: string) =
-        let message =
-            StructureOperations.copyStructureVolume ss aiId rhId
-            |> Result.either 
-                (fun successMessage -> successMessage)  
-                (fun errorMsg -> sprintf "%A" errorMsg)
-        
-        // Log the result of the operation by appending it to the HTML table
-        HtmlOutput.appendStructureOperationResultsToHtmlTable htmlFilePath (aiId, rhId, message) 
-        |> Result.mapError OnboardingError.HtmlOutputError
-    
-    /// Runs the main Onboarding Workflow
+       /// Runs the main Onboarding Workflow
     let run(context: ScriptContext) =
 
         let url = "http://rghrhkfedoc001/radiowiki/api.php?action=parse&format=json&page=DcmCollab_AI_Autosegmentering_af_HH&prop=text"
         let ss = context.StructureSet
+        
+        let outputPath : string =
+            let tempPath : string = Path.GetTempPath()
+            let htmlFileName : string = "output.html"
+            Path.Combine(tempPath, htmlFileName)
         
         let result =
             result {
@@ -39,29 +41,19 @@ module OnboardAiStructures =
                 let! structurePairs = 
                     HtmlTableFetcher.fetchTableData(url) 
                     |> Result.mapError OnboardingError.FetchError
-                    
-                // Write the HTML header to start the output file
-                do! HtmlOutput.writeHeaderToHtml(htmlFilePath) 
-                    |> Result.mapError OnboardingError.HtmlOutputError
-                    
-                // Process and log each structure pair by copying volumes and updating the HTML
-                structurePairs
-                |> List.iter (fun (aiId, rhId) ->
-                    processAndLogPair ss aiId rhId |> ignore
-                )
-
-                // Write the HTML footer to finalize the output file
-                do! HtmlOutput.writeFooterToHtml(htmlFilePath) 
-                    |> Result.mapError OnboardingError.HtmlOutputError
                 
-                // Display the HTML output file in the default web browser
-                do! HtmlOutput.displayHtml(htmlFilePath) 
-                    |> Result.mapError OnboardingError.HtmlOutputError
+                // Process and log each structure pair by copying volumes and updating the HTML                
+                let structureCopyResults =
+                    structurePairs
+                    |> List.map (fun (aiId, rhId) ->
+                        (aiId, rhId, StructureOperations.copyStructureVolume ss aiId rhId)
+                    )
+
+               do! writeHtml outputPath structureCopyResults |> Result.mapError HtmlOutputError
                     
             }
         
         // Display a message box showing the error if the operation fails
         match result with
         | Ok () -> ()
-        | Error err -> MessageBox.Show( err.ToString() ) |> ignore
-
+        | Error err -> MessageBox.Show( OnboardingError.message err ) |> ignore

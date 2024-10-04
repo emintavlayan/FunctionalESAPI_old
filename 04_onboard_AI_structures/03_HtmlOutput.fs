@@ -3,7 +3,6 @@
 open System.IO
 open System.Diagnostics
 open FsToolkit.ErrorHandling
-open System.Windows.Forms
 
 /// Unified result type for the module
 type HtmlOutputResult<'T> = Result<'T, HtmlOutputError>
@@ -12,6 +11,14 @@ and HtmlOutputError =
     | HtmlWriteError of string
     | FileAppendError of string
     | ProcessError of string
+    
+module HtmlOutputError =
+    let message =
+        function
+        | HtmlWriteError e -> $"Failed to write to HTML: {e}"
+        | FileAppendError e -> $"Failed to append to HTML: {e}"
+        | ProcessError e -> $"Failed to start HTML viewer: {e}"
+    
 
 module HtmlOutput =
 
@@ -61,42 +68,57 @@ module HtmlOutput =
     
     /// HTML footer template
     let private htmlFooter : string = "</table></body></html>"
-
-    // Configurable file path and name
-    let tempPath : string = Path.GetTempPath()
-    let htmlFileName : string = "output.html"
-    let htmlFilePath : string = Path.Combine(tempPath, htmlFileName)
     
     /// Initializes the HTML output by creating or overwriting the HTML file with the header
-    let writeHeaderToHtml (path: string) : HtmlOutputResult<unit> =
+    let writeHeaderToHtml (path: string)  =
         try
             File.WriteAllText(path, htmlHeader)
             Ok ()
         with
-        | ex -> Error (HtmlWriteError $"Failed to write to file: {ex.Message}")
+        | ex -> Error ex.Message
     
     /// Appends a table row to the HTML file
-    let appendStructureOperationResultsToHtmlTable (path: string) (aiId, rhId, message) : HtmlOutputResult<unit> =
+    let appendStructureOperationResultsToHtmlTable (path: string) (aiId, rhId, message: StructureOperationResult<string> ) =
+        let message =
+            message |> Result.defaultWith (fun error -> sprintf "%A" error )
+        
         let row = sprintf "<tr><td>%s</td><td>%s</td><td>%s</td></tr>" aiId rhId message
         try
             File.AppendAllText(path, row)
             Ok ()
         with
-        | ex -> Error (FileAppendError $"Failed to append to file: {ex.Message}") 
+        | ex -> Error  ex.Message
            
     /// Finalizes the HTML output by closing HTML tags
-    let writeFooterToHtml (path: string) : HtmlOutputResult<unit> =
+    let writeFooterToHtml (path: string) =
         try
             File.AppendAllText(path, htmlFooter)
             Ok ()
         with
-        | ex -> Error (HtmlWriteError $"Failed to write to file: {ex.Message}")
+        | ex -> Error ex.Message
     
     /// Displays the Html with the default browser.
-    let displayHtml (path: string) : HtmlOutputResult<unit> =
+    let displayHtml (path: string) =
         try
             let psi = ProcessStartInfo(FileName = path, UseShellExecute = true)
             Process.Start(psi) |> ignore
             Ok ()
         with
-        | ex -> Error (ProcessError $"Failed to start process: {ex.Message}")
+        | ex -> Error  ex.Message
+   
+
+    let writeHtml htmlFilePath (structureCopyResults: (string*string*_) list) = result {
+            // Write the HTML header to start the output file
+            do! writeHeaderToHtml(htmlFilePath) |> Result.mapError HtmlOutputError.HtmlWriteError
+            
+            for copyResult in structureCopyResults do
+                do!
+                    appendStructureOperationResultsToHtmlTable htmlFilePath copyResult
+                    |> Result.mapError HtmlOutputError.FileAppendError
+                
+            // Write the HTML footer to finalize the output file
+            do! writeFooterToHtml(htmlFilePath) |> Result.mapError HtmlOutputError.FileAppendError
+
+            // Display the HTML output file in the default web browser
+            do! displayHtml(htmlFilePath) |> Result.mapError HtmlOutputError.ProcessError
+        }

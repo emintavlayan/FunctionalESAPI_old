@@ -4,6 +4,9 @@ open HtmlAgilityPack
 open System
 open Newtonsoft.Json.Linq
 open System.Net.Http
+open FsToolkit.ErrorHandling
+
+open System.Threading.Tasks
 
 /// Unified result type for the module
 type FetchResult<'T> = Result<'T, FetchError>
@@ -11,10 +14,19 @@ type FetchResult<'T> = Result<'T, FetchError>
 and FetchError =
     | HttpRequestFailed of string
     | JsonParsingFailed of string
-    | HtmlParsingFailed of string
-    | TableNotFound of string
-    | RowsNotFound of string
-    | CellExtractionFailed of string
+    | TableNotFound
+    | RowsNotFound
+    | CellExtractionFailed
+    
+module FetchError =
+    
+    let message =
+        function
+        | HttpRequestFailed message -> $"Http request failed: {message}"
+        | JsonParsingFailed message -> $"JSON parsing failed: {message}"
+        | TableNotFound -> "No table with class 'wikitable script' found"
+        | RowsNotFound -> "No rows found in the table"
+        | CellExtractionFailed -> "Failed to extract any valid tuples from rows"
 
 module HtmlTableFetcher =
 
@@ -45,7 +57,7 @@ module HtmlTableFetcher =
             Ok htmlContent
         with
         | :? Newtonsoft.Json.JsonReaderException as ex ->
-            Error (JsonParsingFailed $"Failed to parse JSON. Error: {ex.Message}")
+            Error (JsonParsingFailed ex.Message)
 
     /// Parses an HTML string and returns the specified table.
     let parseHtmlForTable (html: string) : FetchResult<HtmlNode> =
@@ -53,14 +65,14 @@ module HtmlTableFetcher =
         doc.LoadHtml(html)
         let table = doc.DocumentNode.SelectSingleNode("//table[@class='wikitable script']")
         match table with
-        | null -> Error (TableNotFound "No table with class 'wikitable script' found.")
+        | null -> Error TableNotFound
         | _ -> Ok table
 
     /// Extracts rows from the HTML table.
     let extractTableRows (table: HtmlNode) : FetchResult<HtmlNodeCollection> =
         let rows = table.SelectNodes(".//tr")
         match rows with
-        | null -> Error (RowsNotFound "No rows found in the table.")
+        | null -> Error RowsNotFound
         | _ -> Ok rows
 
     /// Validates if a string is non-null, non-whitespace, and non-empty.
@@ -91,13 +103,19 @@ module HtmlTableFetcher =
         if not (tuples.IsEmpty) then 
             Ok tuples
         else 
-            Error (CellExtractionFailed "Failed to extract any valid tuples from rows.")
+            Error CellExtractionFailed
 
     /// Main function to fetch, parse, and return data from a URL as a list of tuples.
     let fetchTableData (url: string) : FetchResult<(string * string) list> =
-        url
-        |> fetchHtmlContent
-        |> Result.bind extractHtmlFromJson
-        |> Result.bind parseHtmlForTable
-        |> Result.bind extractTableRows
-        |> Result.bind extractTuplesFromRows
+        result {
+            let! htmlContent =
+                fetchHtmlContent url
+            
+            let! data =
+                parseHtmlForTable htmlContent
+                
+            let! tableRows =
+                extractTableRows data
+                
+            return! extractTuplesFromRows tableRows
+        }
