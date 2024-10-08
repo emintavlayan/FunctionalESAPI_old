@@ -9,7 +9,7 @@
     <BaseOutputPath></BaseOutputPath>
     <PackageOutputPath>..\..\plugins</PackageOutputPath>
     <IncrementVersionOnBuild>1.yyyy.MMdd.HHmm</IncrementVersionOnBuild>
-    <Version>1.2024.917.1505</Version>
+    <Version>1.2024.918.1206</Version>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Properties\**" />
@@ -28,6 +28,7 @@
     </PackageReference>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+	<PackageReference Include="FSharp.Core" Version="8.0.400" />
   </ItemGroup>
 
   <ItemGroup>

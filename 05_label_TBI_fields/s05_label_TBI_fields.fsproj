@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Content Include="index.html" />
-    <Compile Include="NodeTypes.fs" />
     <Compile Include="JsHelpers.fs" />
     <Compile Include="Fs4Js.fs" />
     <Compile Include="00_WebUI.fs" />

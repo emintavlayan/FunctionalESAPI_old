@@ -2,9 +2,9 @@
 
 open VMS.TPS.Common.Model.API
 
-// Assembly attribute to indicate the script can write data
-[<assembly: ESAPIScript(IsWriteable = true)>]
-do()
+//// Assembly attribute to indicate the script can write data
+//[<assembly: ESAPIScript(IsWriteable = true)>]
+//do()
 
 /// This type of Running the code is imposed by Varian Esapi library.
 [<System.Runtime.CompilerServices.CompilerGeneratedAttribute>]

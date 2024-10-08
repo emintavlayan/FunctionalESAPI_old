@@ -19,7 +19,6 @@ module ElectronMobius =
 
         // Shortcuts wrapped in try-catch to handle potential exceptions
         let pt = tryMe context.Patient "No Patient"
-        let ss = tryMe context.StructureSet "No StructureSet"
         let plan = tryMe context.ExternalPlanSetup "No Plan"
         let beam = tryMe (context.ExternalPlanSetup.Beams |> Seq.head) "No Beam"
         let dose = tryMe context.ExternalPlanSetup.Dose "No Dose"
@@ -61,7 +60,7 @@ module ElectronMobius =
 
             let! applicator = trySelectApplicator beam
             
-            let! width, length = guessApertureDiametersCE ss beam dose
+            let! width, length = guessApertureDiameters dose
 
             let cutoutWidth = (width * 0.1 |> roundTo1).ToString()
             let cutoutLength = (length * 0.1 |> roundTo1).ToString()

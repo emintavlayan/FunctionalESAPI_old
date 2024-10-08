@@ -11,7 +11,7 @@ module WebUI =
         let lEvent = WebUIEvent(e)
     
         let ppSelection = lEvent.GetString()
-        let tpSelection = lEvent.GetStringAt(UIntPtr(1UL))
+        let tpSelection = lEvent.GetStringAt(unativeint 1)
     
         printfn "Selected Plans: Planning Plan = %s, Treatment Plan = %s" ppSelection tpSelection
 
