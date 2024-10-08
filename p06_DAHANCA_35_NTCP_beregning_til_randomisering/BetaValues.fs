@@ -30,7 +30,7 @@ module BetaValues =
     // Constants for XerostomiBaseline
     let Nothing       = 1.0000
     let aBitBeta      = 0.5234
-    let quiteABitBeta = 1.2763
+    let quiteABitBeta = remove .2763
 
     // Accessor functions for tumor placement beta values
     let getTumorPlaceringBeta (tumorPlacering: DysfagiTumorPlacering) =
