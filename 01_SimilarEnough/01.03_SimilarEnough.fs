@@ -37,7 +37,7 @@ type StringExtensions() =
     ///   - string1.SimilarEnough(string2);
     [<Extension>]
     static member SimilarEnough (str1: string, str2: string) : bool =
-        // Check for null values first to prevent C# people from frustration
+        // Check for null values first to prevent C# nullq
         match str1, str2 with
         | null, _ -> false
         | _, null -> false
