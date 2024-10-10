@@ -17,7 +17,6 @@ and StructureOperationError =
     | RemoveStructureFailed of string
     | UnexpectedError of string
 
-/// 
 module StructureOperations =
 
     /// Strips non-alphanumeric characters from a string and converts it to lowercase.
@@ -42,7 +41,7 @@ module StructureOperations =
         not structure.IsEmpty && 
         structure.HasSegment  
 
-    /// Checks if AI structure has significant volume.
+    /// Checks if AI structure has a significant volume.
     let validateAiStrHasVolume (structure: Structure) : StructureOperationResult<Structure> =
         if hasVolume structure 
         then Ok structure
@@ -101,7 +100,7 @@ module StructureOperations =
             // Attempt to remove aiStructure, but ignore any errors since copying is our main concern
             let removeMessage = safeRemoveStructure ss aiStructure
 
-            // Attempt to make every structure high resolution ---- NOT IMPLEMENTED YET ----
+            // Attempt to make every structure high resolution ---- NOT BEEN DECIDED TO IMPLEMENT ----
             //tryAllToHighResolution(ss)
         
             return ( $"Volume has been copied successfully." + removeMessage )
