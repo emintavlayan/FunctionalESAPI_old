@@ -18,8 +18,8 @@ module OnboardingError =
     
     let message =
         function
-        | FetchError e -> $"Failed to fetch data: {FetchError.message e}"
-        | HtmlOutputError e -> $"Failed to prepare HTML: {e}"
+        | FetchError e -> FetchError.message e
+        | HtmlOutputError e -> HtmlOutputError.message   e
             
 
 module OnboardAiStructures =
