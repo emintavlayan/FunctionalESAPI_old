@@ -44,10 +44,8 @@ module ActivePatterns =
         // All the action starts here
         if (hasDirectionSuffix(s1)) && (s2 = baseOf s1)  // s1 equals the base of s2
         then Some ()  
-        elif (hasDirectionSuffix(s2)) &&  // reverted version
-            (s1 = baseOf s2)
+        elif (hasDirectionSuffix(s2)) && (s1 = baseOf s2)
         then Some ()  
-
         else None
 
     /// Define the next best active pattern here
