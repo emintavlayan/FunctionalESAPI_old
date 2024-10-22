@@ -18,7 +18,6 @@ module ActivePatterns =
     /// Checks if both strings are variations of 'bowel'
     /// example: 'Bowel', 'BowelBag' or 'SmallBowel'.
     let (|BothAreBowel|_|) (s1:string) (s2: string) =
-        
         if  (s1.Contains("bowel")) && (s2.Contains("bowel"))
         then Some () 
         else None
@@ -36,23 +35,18 @@ module ActivePatterns =
 
         // Strips the string off the direction suffix
         let baseOf (b: string)=
-
             if b.EndsWith("left") 
-                then b.Substring(0, b.Length - 4)  // remove last 4 chars
-
+            then b.Substring(0, b.Length - 4)  // remove last 4 chars
             elif b.EndsWith("right") 
-                then b.Substring(0, b.Length - 5)  // or 5
-             
-            else b.Substring(0, b.Length - 1)      // or just one for 'l' , 'r'
+            then b.Substring(0, b.Length - 5)  // or 5
+            else b.Substring(0, b.Length - 1)  // or just one for 'l' , 'r'
         
         // All the action starts here
-        if (hasDirectionSuffix(s1)) &&    // s1 has a suffix and
-            (s2 = baseOf s1)              // s2 equals the base of s2
-            then Some ()  
-
+        if (hasDirectionSuffix(s1)) && (s2 = baseOf s1)  // s1 equals the base of s2
+        then Some ()  
         elif (hasDirectionSuffix(s2)) &&  // reverted version
             (s1 = baseOf s2)
-            then Some ()  
+        then Some ()  
 
         else None
 
