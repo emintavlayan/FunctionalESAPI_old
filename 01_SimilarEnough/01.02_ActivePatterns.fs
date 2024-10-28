@@ -36,12 +36,10 @@ module ActivePatterns =
         // Strips the string off the direction suffix
         let baseOf (b: string)=
             if b.EndsWith("left") 
-<<<<<<< HEAD
                 then b.Substring(0, b.Length - 4)  // remove last 4 chars
             elif b.EndsWith("right") 
                 then b.Substring(0, b.Length - 5)  // or 5
             else b.Substring(0, b.Length - 1)      // or just one for 'l' , 'r'
-=======
         
         // All the action starts here
         if (hasDirectionSuffix(s1)) && (s2 = baseOf s1)  // s1 equals the base of s2
