@@ -18,7 +18,6 @@ module ActivePatterns =
     /// Checks if both strings are variations of 'bowel'
     /// example: 'Bowel', 'BowelBag' or 'SmallBowel'.
     let (|BothAreBowel|_|) (s1:string) (s2: string) =
-        
         if  (s1.Contains("bowel")) && (s2.Contains("bowel"))
         then Some () 
         else None
@@ -39,10 +38,8 @@ module ActivePatterns =
 
             if b.EndsWith("left") 
                 then b.Substring(0, b.Length - 4)  // remove last 4 chars
-
             elif b.EndsWith("right") 
                 then b.Substring(0, b.Length - 5)  // or 5
-             
             else b.Substring(0, b.Length - 1)      // or just one for 'l' , 'r'
         
         // All the action starts here
