@@ -12,9 +12,9 @@
 
   <ItemGroup>
     <Compile Include="read.md" />
-    <Compile Include="01.01_RegexUtils.fs" />
-    <Compile Include="01.02_ActivePatterns.fs" />
-    <Compile Include="01.03_SimilarEnough.fs" />
+    <Compile Include="0101_RegexUtils.fs" />
+    <Compile Include="0102_ActivePatterns.fs" />
+    <Compile Include="0103_SimilarEnough.fs" />
   </ItemGroup>
 
   <ItemGroup>
