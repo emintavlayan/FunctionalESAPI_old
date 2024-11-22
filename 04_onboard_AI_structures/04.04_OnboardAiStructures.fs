@@ -24,16 +24,14 @@ module OnboardingError =
 
 module OnboardAiStructures =
 
-       /// Runs the main Onboarding Workflow
+    /// Runs the main Onboarding Workflow
     let run(context: ScriptContext) =
 
-        let url = "http://rghrhkfedoc001/radiowiki/api.php?action=parse&format=json&page=DcmCollab_AI_Autosegmentering_af_HH&prop=text"
+        let url = "http://rghariawikip01/radiowiki/api.php?action=parse&format=json&page=DcmCollab_AI_Autosegmentering_af_HH&prop=text"
         let ss = context.StructureSet
         
-        let outputPath : string =
-            let tempPath : string = Path.GetTempPath()
-            let htmlFileName : string = "output.html"
-            Path.Combine(tempPath, htmlFileName)
+        let outputPath = 
+            Path.Combine(Path.GetTempPath() , "output.html")          
         
         let result =
             result {

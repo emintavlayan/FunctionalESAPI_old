@@ -108,14 +108,8 @@ module HtmlTableFetcher =
     /// Main function to fetch, parse, and return data from a URL as a list of tuples.
     let fetchTableData (url: string) : FetchResult<(string * string) list> =
         result {
-            let! htmlContent =
-                fetchHtmlContent url
-            
-            let! data =
-                parseHtmlForTable htmlContent
-                
-            let! tableRows =
-                extractTableRows data
-                
+            let! htmlContent = fetchHtmlContent url
+            let! data = parseHtmlForTable htmlContent  
+            let! tableRows = extractTableRows data  
             return! extractTuplesFromRows tableRows
         }
