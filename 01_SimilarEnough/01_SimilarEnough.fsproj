@@ -5,24 +5,26 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <WarnOn>3390;$(WarnOn)</WarnOn>
     <PlatformTarget>x64</PlatformTarget>
-    <AssemblyName>s01_SimilarEnough.esapi</AssemblyName>
+    <AssemblyName>$(MSBuildProjectName).esapi</AssemblyName>
     <IncrementVersionOnBuild>1.yyyy.MMdd.HHmm</IncrementVersionOnBuild>
-    <Version>1.2024.917.1428</Version>
+    <Version>1.2024.1122.1514</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="read.md" />
+    <None Include="README.md" />
     <Compile Include="0101_RegexUtils.fs" />
     <Compile Include="0102_ActivePatterns.fs" />
     <Compile Include="0103_SimilarEnough.fs" />
   </ItemGroup>
 
+  <ItemGroup />
+
   <ItemGroup>
-    <PackageReference Include="Costura.Fody" Version="5.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="9.0.100" />
   </ItemGroup>
 </Project>

@@ -19,11 +19,11 @@ module NtcpCalculation =
         let organLPSum = 
 
             organList
-            |> Seq.map (getOrganBeta "extendedOralCavity" ) *  
+            //|> Seq.map (getOrganBeta "extendedOralCavity" ) *  
         
         
+        0 |> ignore 
         
-        
-        0
+    0 |> ignore 
 
 

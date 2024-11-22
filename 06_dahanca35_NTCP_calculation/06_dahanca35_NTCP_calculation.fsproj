@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Definitions.fs" />
-    <Compile Include="BetaValues.fs" />
-    <Compile Include="NtcpCalculation.fs" />
-    <None Include="Script.fsx" />
+    <Compile Include="0601_Definitions.fs" />
+    <Compile Include="0602_BetaValues.fs" />
+    <Compile Include="0603_NtcpCalculation.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="9.0.100" />
   </ItemGroup>
 </Project>

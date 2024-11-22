@@ -9,27 +9,21 @@
     <PlatformTarget>x64</PlatformTarget>
     <OutputType>Library</OutputType>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2024.912.1636</Version>
+    <Version>1.2024.1122.1514</Version>
+    <UserSecretsId>09417e89-9a9e-46c7-ad36-870b407ecd12</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="index.html" />
-    <Compile Include="JsHelpers.fs" />
-    <Compile Include="Fs4Js.fs" />
-    <Compile Include="00_WebUI.fs" />
-    <Compile Include="01_Utility.fs" />
-    <Compile Include="02_TbiPlanTypes.fs" />
-    <Compile Include="03_PlanCollection.fs" />
-    <Compile Include="04_CourseIntegrityCheck.fs" />
-    <Compile Include="Model.fs" />
-    <Compile Include="View.fs" />
-    <Compile Include="Update.fs" />
-    <Compile Include="10_Main.fs" />
+    <Compile Include="0501_Utility.fs" />
+    <Compile Include="0502_TbiPlanTypes.fs" />
+    <Compile Include="0503_PlanCollection.fs" />
+    <Compile Include="0504_CourseIntegrityCheck.fs" />
+    <Compile Include="0510_Main.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EvilDICOM" Version="3.0.8998.340" />
-    <PackageReference Include="FsToolkit.ErrorHandling" Version="4.16.0" />
+    <PackageReference Include="FsToolkit.ErrorHandling" Version="4.18.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,8 +34,9 @@
     <Reference Include="VMS.TPS.Common.Model.Types">
       <HintPath>C:\Program Files (x86)\Varian\RTM\18.0\esapi\API\VMS.TPS.Common.Model.Types.dll</HintPath>
     </Reference>
-    <Reference Include="WebUI4CSharp_net48">
-      <HintPath>..\WebUI\WebUI4CSharp_net48\bin\Debug\WebUI4CSharp_net48.dll</HintPath>
-    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="9.0.100" />
   </ItemGroup>
 </Project>
