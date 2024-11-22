@@ -109,7 +109,10 @@ module HtmlTableFetcher =
     let fetchTableData (url: string) : FetchResult<(string * string) list> =
         result {
             let! htmlContent = fetchHtmlContent url
+
             let! data = parseHtmlForTable htmlContent  
+
             let! tableRows = extractTableRows data  
+
             return! extractTuplesFromRows tableRows
         }
