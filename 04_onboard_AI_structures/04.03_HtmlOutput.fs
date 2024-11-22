@@ -74,7 +74,7 @@ module HtmlOutput =
     let private htmlFooter : string = "</table></body></html>"
     
     /// Initializes the HTML output by creating or overwriting the HTML file with the header
-    let writeHeaderToHtml (ssId: string) (path: string) =
+    let writeHeaderToHtml (path: string) (ssId: string) =
         try
             File.WriteAllText(path, createHtmlHeader ssId)
             Ok ()
@@ -111,18 +111,22 @@ module HtmlOutput =
         | ex -> Error  ex.Message
    
 
-    let writeAndDisplayHtml htmlFilePath ssid (structureCopyResults: (string*string*_) list) = result {
+    let writeAndDisplayHtml htmlFilePath ssid (structureCopyResults: (string*string*_) list) = 
+        result {
+
             // Write the HTML header to start the output file
-            do! writeHeaderToHtml htmlFilePath ssid |> Result.mapError HtmlOutputError.HtmlWriteError
+            do! writeHeaderToHtml htmlFilePath ssid 
+                |> Result.mapError HtmlOutputError.HtmlWriteError
             
             for copyResult in structureCopyResults do
-                do!
-                    appendStructureOperationResultsToHtmlTable htmlFilePath copyResult
+                do! appendStructureOperationResultsToHtmlTable htmlFilePath copyResult
                     |> Result.mapError HtmlOutputError.FileAppendError
                 
             // Write the HTML footer to finalize the output file
-            do! writeFooterToHtml(htmlFilePath) |> Result.mapError HtmlOutputError.FileAppendError
+            do! writeFooterToHtml(htmlFilePath) 
+                |> Result.mapError HtmlOutputError.FileAppendError
 
             // Display the HTML output file in the default web browser
-            do! displayHtml(htmlFilePath) |> Result.mapError HtmlOutputError.ProcessError
+            do! displayHtml(htmlFilePath) 
+                |> Result.mapError HtmlOutputError.ProcessError
         }

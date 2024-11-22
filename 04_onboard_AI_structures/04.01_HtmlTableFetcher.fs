@@ -14,7 +14,7 @@ type FetchResult<'T> = Result<'T, FetchError>
 and FetchError =
     | HttpRequestFailed of string
     | JsonParsingFailed of string
-    | TableNotFound
+    | TableNotFound of string
     | RowsNotFound
     | CellExtractionFailed
     
@@ -24,14 +24,14 @@ module FetchError =
         function
         | HttpRequestFailed message -> $"Http request failed: {message}"
         | JsonParsingFailed message -> $"JSON parsing failed: {message}"
-        | TableNotFound -> "No table with class 'wikitable script' found"
+        | TableNotFound html -> $"No table with class 'wikitable script' found. {html}"
         | RowsNotFound -> "No rows found in the table"
         | CellExtractionFailed -> "Failed to extract any valid tuples from rows"
 
 module HtmlTableFetcher =
 
     /// Makes an HTTP request to a URL and returns the response content.
-    let fetchHtmlContent (url: string) : FetchResult<string> =
+    let fetchJsonFromUrl (url: string) : FetchResult<string> =
         try
             use client = new HttpClient()
             let response = 
@@ -60,27 +60,23 @@ module HtmlTableFetcher =
             Error (JsonParsingFailed ex.Message)
 
     /// Parses an HTML string and returns the specified table.
-    let parseHtmlForTable (html: string) : FetchResult<HtmlNode> =
+    let parseTableFromHtml (html: string) : FetchResult<HtmlNode> =
         let doc = HtmlDocument()
         doc.LoadHtml(html)
-        let table = doc.DocumentNode.SelectSingleNode("//table[@class='wikitable script']")
+        let table = doc.DocumentNode.SelectSingleNode("//table[contains(@class, 'wikitable') and contains(@class, 'script')]")
         match table with
-        | null -> Error TableNotFound
+        | null -> Error (TableNotFound doc.ParsedText )
         | _ -> Ok table
 
     /// Extracts rows from the HTML table.
-    let extractTableRows (table: HtmlNode) : FetchResult<HtmlNodeCollection> =
+    let extractRowsFromTable (table: HtmlNode) : FetchResult<HtmlNodeCollection> =
         let rows = table.SelectNodes(".//tr")
         match rows with
         | null -> Error RowsNotFound
         | _ -> Ok rows
-
-    /// Validates if a string is non-null, non-whitespace, and non-empty.
-    let isValidString (str: string) : bool =
-        not (String.IsNullOrWhiteSpace(str))
     
     /// Extracts cell values from a row if it contains at least two valid cells.
-    let extractTupleFromRow (row: HtmlNode) : option<(string * string)> =
+    let extractPairFromSingleRow (row: HtmlNode) : option<(string * string)> =
         match row.SelectNodes(".//td") with
         | null -> None
         | cells when cells.Count < 2 -> None
@@ -88,16 +84,16 @@ module HtmlTableFetcher =
             let cell1 = cells.[0].InnerText.Trim()
             let cell2 = cells.[1].InnerText.Trim()
             
-            match isValidString cell1, isValidString cell2 with
-            | true, true -> Some (cell1, cell2)
+            match String.IsNullOrWhiteSpace(cell1), String.IsNullOrWhiteSpace(cell2) with
+            | false, false -> Some (cell1, cell2)
             | _ -> None
     
     /// Extracts tuples of data from table rows.
-    let extractTuplesFromRows (rows: HtmlNodeCollection) : FetchResult<(string * string) list> =
+    let extractPairsFromRows (rows: HtmlNodeCollection) : FetchResult<(string * string) list> =
         let tuples = 
             rows
             |> Seq.cast<HtmlNode>
-            |> Seq.choose extractTupleFromRow
+            |> Seq.choose extractPairFromSingleRow
             |> Seq.toList
 
         if not (tuples.IsEmpty) then 
@@ -108,11 +104,13 @@ module HtmlTableFetcher =
     /// Main function to fetch, parse, and return data from a URL as a list of tuples.
     let fetchTableData (url: string) : FetchResult<(string * string) list> =
         result {
-            let! htmlContent = fetchHtmlContent url
+            let! json = fetchJsonFromUrl url
 
-            let! data = parseHtmlForTable htmlContent  
+            let! html = extractHtmlFromJson json
+            
+            let! table = parseTableFromHtml html  
 
-            let! tableRows = extractTableRows data  
+            let! tableRows = extractRowsFromTable table  
 
-            return! extractTuplesFromRows tableRows
+            return! extractPairsFromRows tableRows
         }

@@ -6,7 +6,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <AssemblyName>onboard_AI_structures.esapi</AssemblyName>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2024.1015.930</Version>
+    <Version>1.2024.1122.1317</Version>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
@@ -18,8 +18,8 @@
     <Compile Include="04.05_Main.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FsToolkit.ErrorHandling" Version="4.16.0" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.63" />
+    <PackageReference Include="FsToolkit.ErrorHandling" Version="4.18.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.71" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
@@ -33,6 +33,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="8.0.400" />
+    <PackageReference Update="FSharp.Core" Version="9.0.100" />
   </ItemGroup>
 </Project>

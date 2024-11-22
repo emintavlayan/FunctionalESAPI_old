@@ -27,10 +27,14 @@ module OnboardAiStructures =
     /// Runs the main Onboarding Workflow
     let run(context: ScriptContext) =
 
-        let url = "http://rghariawikip01/radiowiki/api.php?action=parse&format=json&page=DcmCollab_AI_Autosegmentering_af_HH&prop=text"
-        let ss = context.StructureSet
+        let url = 
+            "http://rghariawikip01/radiowiki/api.php?action=parse&format=json&page=DcmCollab_AI_Autosegmentering_af_HH&prop=text"
+        
+        let ss = 
+            context.StructureSet
         
         let outputPath = 
+            MessageBox.Show(Path.Combine(Path.GetTempPath() , "output.html")) |> ignore
             Path.Combine(Path.GetTempPath() , "output.html")          
         
         let result =
@@ -47,7 +51,8 @@ module OnboardAiStructures =
                         (aiId, rhId, StructureOperations.copyStructureVolume ss aiId rhId)
                     )
 
-               do! writeAndDisplayHtml outputPath ss.Id structureCopyResults |> Result.mapError HtmlOutputError
+                do! writeAndDisplayHtml outputPath ss.Id structureCopyResults 
+                    |> Result.mapError HtmlOutputError
                     
             }
         
