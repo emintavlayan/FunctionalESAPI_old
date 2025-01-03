@@ -66,7 +66,7 @@ module ElectronMobius =
             let cutoutLength = (length * 0.1 |> roundTo1).ToString()
 
             let! ssd =
-                match (beam.Boluses |> Seq.toList) with
+                match (beam.Boluses |> Seq.toList) with // head?
                 | [b] -> 
                     let ssdToBolusInCm = (beam.GetSourceToBolusDistance(b) * 0.1 |> roundTo1).ToString()
                     Ok (ssdToBolusInCm)
