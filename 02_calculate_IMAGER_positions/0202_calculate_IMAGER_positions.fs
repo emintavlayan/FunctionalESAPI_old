@@ -33,8 +33,10 @@ module ImagerPositionCalculation =
         /// - `x1`: The X1 jaw position.
         /// - `x2`: The X2 jaw position.
         let calculateImagerLat x1 x2 =
+
             // Calculate the absolute shift needed
-            let shiftLat = (abs (x1 - x2) / 2.0) * 1.6 // Because the imager is at 60.0cm
+            let shiftLat = 
+                (abs (x1 - x2) / 2.0) * 1.6 // Because the imager is at 60.0cm
 
             // Apply constraints to the shift
             let constrainedShiftLat =
@@ -45,7 +47,8 @@ module ImagerPositionCalculation =
 
             // Calculate the imager lateral position based on direction
             let imagerLat =
-                if ( constrainedShiftLat > 0.0 ) && ( x1 > x2 ) then
+                if ( constrainedShiftLat > 0.0 ) && ( x1 > x2 ) 
+                then
                     1000.0 - constrainedShiftLat 
                 else
                     constrainedShiftLat
@@ -113,7 +116,15 @@ module ImagerPositionCalculation =
                 let imagerLat = calculateImagerLat x1 x2
                 
                 // Create a setup beam record with the input values and calculated imager positions
-                { Id = id; X1 = x1; X2 = x2; Y1 = y1; Y2 = y2; ImagerVrt = 60.0; ImagerLng = imagerLng; ImagerLat = imagerLat })
+                { Id = id
+                ; X1 = x1
+                ; X2 = x2
+                ; Y1 = y1
+                ; Y2 = y2
+                ; ImagerVrt = 60.0
+                ; ImagerLng = imagerLng
+                ; ImagerLat = imagerLat 
+                })
             |> List.ofSeq // Convert seq<setupBeam> to setupBeam list
 
         /// Helper function to check if a string contains all specified substrings.
@@ -178,7 +189,15 @@ module ImagerPositionCalculation =
                 [
                     yield! List.map (fun prop ->
                         sprintf "<tr><td style=\"width: 100px;\">%s</td>%s</tr>" prop (String.concat "" [for beam in sortedBeams -> sprintf "<td>%.1f</td>" (getValue prop beam)])
-                    ) ["X1"; "X2"; "Y1"; "Y2"; "ImagerVrt"; "ImagerLng"; "ImagerLat"]
+                    ) 
+                    [ "X1"
+                    ; "X2"
+                    ; "Y1"
+                    ; "Y2"
+                    ; "ImagerVrt"
+                    ; "ImagerLng"
+                    ; "ImagerLat"
+                    ]
                 ]
                 |> List.fold (+) ""
             sprintf "<!DOCTYPE html>\n<html>\n<head>\n<style>\nbody {\n  margin-left: 5%%;\n  margin-right: 5%%;\n  font-family: sans-serif;\n}\n\nh1 {\n  display: block;\n  font-size: 2em;\n  margin-block-start: 0.67em;\n  margin-block-end: 0.67em;\n  margin-inline-start: 0px;\n  margin-inline-end: 0px;\n  font-weight: bold;\n  margin-left: -3%%;\n}\n\ntable {\n  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;\n  border: 2px solid blue;\n  border-collapse: collapse;\n  text-indent: initial;\n  white-space: normal;\n  line-height: normal;\n  font-weight: normal;\n  font-style: normal;\n  text-align: start;\n  border-spacing: 2px;\n  font-variant: normal;\n}\n\ntd, th {\n  font-size: 1.17em;\n  border: 1px solid blue;\n  padding: 3px 7px 2px 7px;\n  text-align: left;\n  padding: 8px;\n width: 120px;\n}\nth {background-color: lightgray;}\n</style>\n</head>\n<body>\n<h1>\nImager Positions\n</h1>\n<table>%s%s</table>\n</body>\n</html>" headerRow bodyRows

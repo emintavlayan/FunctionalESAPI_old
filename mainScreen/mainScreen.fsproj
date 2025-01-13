@@ -4,14 +4,14 @@
 
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <WarnOn>3390;$(WarnOn)</WarnOn>
-    <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
     <AssemblyName>$(MSBuildProjectName).esapi</AssemblyName>
     <PlatformTarget>x64</PlatformTarget>
-    <Version>1.2024.1125.1813</Version>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="0801_remove_AI_structures.fs" />
+    <Compile Include="Library1.fs" />
+    <None Include="Script.fsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,9 +22,5 @@
     <Reference Include="VMS.TPS.Common.Model.Types">
       <HintPath>..\..\..\..\..\Program Files (x86)\Varian\RTM\18.0\esapi\API\VMS.TPS.Common.Model.Types.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="9.0.100" />
   </ItemGroup>
 </Project>

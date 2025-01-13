@@ -9,7 +9,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <OutputType>Library</OutputType>
     <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
-    <Version>1.2024.1122.1514</Version>
+    <Version>1.2024.1125.1813</Version>
   </PropertyGroup>
 
   <ItemGroup>
