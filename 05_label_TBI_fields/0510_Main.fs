@@ -12,7 +12,7 @@ type Script() =
     
     member __.Execute(context: ScriptContext) = 
     
-//        // Initilazation
+//        // Initilazation 01
 //        let course = context.Course
 
 //        let planIdList : string list =
