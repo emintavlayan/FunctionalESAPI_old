@@ -26,9 +26,6 @@ module Url =
         (tpsMu: string)
         : string =
 
-        // Base URL
-        let url = baseUrl + "?"
-
         // Query parameters for all fields (including patient name and id)
         let queryParams =
             [ "patientName_str", urlEncode patientName
@@ -44,16 +41,16 @@ module Url =
               "beamName_str0", urlEncode beamName
               "tpsMu_int0", tpsMu ]
 
-        // Join the parameters to create the query string
+        // Joins the parameters to create the query string
         let queryString =
             queryParams
             |> List.map (fun (key, value) -> sprintf "%s=%s" key value)
             |> String.concat "&"
 
-        // Return the full URL
-        url + queryString
+        // Returns the full URL
+        url + "?" + queryString
 
-    // Function to open the generated URL in the default browser
+    // Opens a URL in the default browser
     let openUrlInBrowser (url: string) =
         let psi = new ProcessStartInfo(url)
         psi.UseShellExecute <- true
