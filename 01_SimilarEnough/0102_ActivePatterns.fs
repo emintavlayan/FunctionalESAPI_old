@@ -49,5 +49,4 @@ module ActivePatterns =
         else None
 
     /// Define the next best active pattern here
-    /// ---
-        
+    
