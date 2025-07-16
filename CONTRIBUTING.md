@@ -1,6 +1,7 @@
 # Functional Scripting Design Guide (F# + ESAPI)
 
-This guide defines the design principles for clean, composable, and robust F# scripting — with or without ESAPI. It applies to all scripts within this solution to ensure maintainability, clarity, and safe error handling.
+This guide defines the design principles for clean, composable, and robust F# scripting with ESAPI. 
+It applies to all scripts within this solution to ensure maintainability, clarity, and safe error handling.
 
 ---
 
